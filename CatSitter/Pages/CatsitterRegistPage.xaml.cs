@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.DataBase;
+using Core.Functions;
 
 namespace CatSitter.Pages
 {
@@ -20,9 +22,38 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class CatsitterRegistPage : Page
     {
+        List<Housing> housings { get; set; }
         public CatsitterRegistPage()
         {
             InitializeComponent();
+            housings = HousingFunction.GetHousings();
+            cbHousing.ItemsSource = housings;
+            cbHousing.DisplayMemberPath = "Name";
+        }
+
+        private void btnCatsitter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMinus_Click(object sender, RoutedEventArgs e)
+        {
+            int years = Convert.ToInt32(tbYears.Text);
+            if (years != 0)
+            {
+                tbYears.Text = (years - 1).ToString();
+            }
+        }
+
+        private void btnPlus_Click(object sender, RoutedEventArgs e)
+        {
+            int years = Convert.ToInt32(tbYears.Text);
+            tbYears.Text = (years + 1).ToString();
         }
     }
 }

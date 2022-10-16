@@ -37,7 +37,8 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    FontSize="30"
-                   FontWeight="Bold" Foreground="#FFB48A8E"/>
+                   FontWeight="Bold" 
+                   Foreground="#FFB48A8E"/>
 
         <TextBox x:Name="tbLogin"
                  materialDesign:HintAssist.Hint="Логин"  

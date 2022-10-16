@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="Functions\ApplicationFunction.cs" />
     <Compile Include="Functions\AuthorizationFunction.cs" />
+    <Compile Include="Functions\HousingFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

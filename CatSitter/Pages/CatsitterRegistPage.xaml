@@ -4,11 +4,147 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:CatSitter.Pages"
+      xmlns:system="clr-namespace:System;assembly=mscorlib"
+      AutomationProperties.Name="{Binding Title, RelativeSource={RelativeSource Self}}"
       mc:Ignorable="d" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CatsitterRegistPage">
 
-    <Grid>
-        
-    </Grid>
+    <materialDesign:DialogHost DialogTheme="Inherit"
+                             Identifier="RootDialog"
+                             SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <DockPanel MinWidth="350">
+                    <StackPanel>
+                        <TextBlock Text="Меню"
+                               HorizontalAlignment="Center"
+                               FontSize="30"
+                               Foreground="#FFB48A8E"
+                               Margin="10"/>
+                        <Button x:Name="btnCatsitter"
+                                Content="Стать кэтситтером"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"
+                                Click="btnCatsitter_Click"/>
+                        <Button x:Name="btnExit"
+                                Content="Выход"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"
+                                Click="btnExit_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+
+            <DockPanel>
+                <materialDesign:ColorZone Padding="16"
+                                  materialDesign:ElevationAssist.Elevation="Dp4"
+                                  DockPanel.Dock="Top"
+                                  Mode="PrimaryMid" 
+                                  Background="#FFE4D5D0">
+                    <DockPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Stretch">
+                            <ToggleButton x:Name="MenuToggleButton"
+                            AutomationProperties.Name="HamburgerToggleButton"
+                            IsChecked="False"
+                            Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
+                            
+                            <TextBlock Text="Стать кэтситтером"
+                                       FontSize="30"
+                                       Foreground="#FFB48A8E"
+                                       Margin="50, 0, 0, 0"/>
+                        </StackPanel>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Опыт ухода за животными"
+                               Grid.Row="1"
+                               Grid.Column="1" Grid.ColumnSpan="2"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               Foreground="#FF6A6D6C"/>
+
+                    <Button x:Name="btnMinus"
+                            Content="-"
+                            Grid.Column="3"
+                            Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Foreground="#FF6A6D6C"
+                            BorderBrush="#FFE5D6D1"
+                            BorderThickness="4"
+                            Background="#FFE4D5D0" Click="btnMinus_Click"/>
+                    <TextBlock x:Name="tbYears"
+                               Text="0"
+                               Grid.Column="3"
+                               Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               Foreground="#FF6A6D6C"/>
+                    <Button x:Name="btnPlus"
+                            Content="+"
+                            Grid.Column="3"
+                            Grid.Row="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontSize="20"
+                            Foreground="#FF6A6D6C"
+                            BorderBrush="#FFE5D6D1"
+                            BorderThickness="4"
+                            Background="#FFE4D5D0" Click="btnPlus_Click"/>
+                    
+                    <TextBlock Text="Тип жилья"
+                               Grid.Row="2"
+                               Grid.Column="1" Grid.ColumnSpan="2"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               Foreground="#FF6A6D6C"/>
+                    <ComboBox Name="cbHousing"
+                              Grid.Row="2"
+                              Grid.Column="3"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Stretch"
+                              FontSize="20"
+                              IsEditable="True"
+                              Foreground="#FF6A6D6C"/>
+
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
 </Page>
