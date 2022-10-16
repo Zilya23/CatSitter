@@ -52,41 +52,44 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataBase\Animal.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Application_Animal.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Applictioon.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\bd_connection.cs" />
-    <Compile Include="DataBase\CatsitterDB.Context.cs">
+    <Compile Include="DataBase\CatSiterBD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatsitterDB.Context.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CatsitterDB.cs">
+    <Compile Include="DataBase\CatSiterBD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CatsitterDB.Designer.cs">
+    <Compile Include="DataBase\CatSiterBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatsitterDB.edmx</DependentUpon>
+      <DependentUpon>CatSiterBD.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\City.cs">
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Housing.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\sysdiagrams.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User_Animal.cs">
-      <DependentUpon>CatsitterDB.tt</DependentUpon>
+      <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Functions\ApplicationFunction.cs" />
     <Compile Include="Functions\AuthorizationFunction.cs" />
@@ -94,12 +97,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DataBase\CatsitterDB.edmx">
+    <EntityDeploy Include="DataBase\CatSiterBD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CatsitterDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>CatSiterBD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataBase\CatsitterDB.edmx.diagram">
-      <DependentUpon>CatsitterDB.edmx</DependentUpon>
+    <None Include="DataBase\CatSiterBD.edmx.diagram">
+      <DependentUpon>CatSiterBD.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -107,15 +110,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataBase\CatsitterDB.Context.tt">
+    <Content Include="DataBase\CatSiterBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CatsitterDB.edmx</DependentUpon>
-      <LastGenOutput>CatsitterDB.Context.cs</LastGenOutput>
+      <DependentUpon>CatSiterBD.edmx</DependentUpon>
+      <LastGenOutput>CatSiterBD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataBase\CatsitterDB.tt">
+    <Content Include="DataBase\CatSiterBD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CatsitterDB.edmx</DependentUpon>
-      <LastGenOutput>CatsitterDB.cs</LastGenOutput>
+      <DependentUpon>CatSiterBD.edmx</DependentUpon>
+      <LastGenOutput>CatSiterBD.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

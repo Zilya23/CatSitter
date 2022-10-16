@@ -8,6 +8,6 @@ namespace Core.DataBase
 {
     public class bd_connection
     {
-        public static CatsitterEntities1 connection = new CatsitterEntities1();
+        public static CatsitterEntities2 connection = new CatsitterEntities2();
     }
 }

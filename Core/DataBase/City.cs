@@ -12,38 +12,21 @@ namespace Core.DataBase
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public City()
         {
             this.Applictioon = new HashSet<Applictioon>();
-            this.User_Animal = new HashSet<User_Animal>();
+            this.User = new HashSet<User>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string LastName { get; set; }
-        public string Patronymic { get; set; }
-        public Nullable<System.DateTime> DateRegist { get; set; }
-        public string Telephone { get; set; }
-        public string Email { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string Address { get; set; }
-        public Nullable<int> CaringExperience { get; set; }
-        public Nullable<int> IDHousing { get; set; }
-        public Nullable<bool> ThereAnimal { get; set; }
-        public Nullable<bool> ThereChildren { get; set; }
-        public Nullable<int> NumberAnimalReceive { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public Nullable<int> IDCity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Applictioon> Applictioon { get; set; }
-        public virtual City City { get; set; }
-        public virtual Housing Housing { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User_Animal> User_Animal { get; set; }
+        public virtual ICollection<User> User { get; set; }
     }
 }

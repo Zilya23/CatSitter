@@ -35,5 +35,15 @@ namespace CatSitter.Pages
         {
 
         }
+
+        private void btnCatsitter_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CatsitterRegistPage());
+        }
+
+        private void btnExit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AuthorizationPage());
+        }
     }
 }

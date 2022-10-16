@@ -32,6 +32,14 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Active" Type="bit" />
           <Property Name="IDUser" Type="int" />
+          <Property Name="IDCity" Type="int" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Housing">
           <Key>
@@ -68,9 +76,9 @@
           <Property Name="ThereAnimal" Type="bit" />
           <Property Name="ThereChildren" Type="bit" />
           <Property Name="NumberAnimalReceive" Type="int" />
-          <Property Name="City" Type="varchar" MaxLength="20" />
           <Property Name="Login" Type="varchar" MaxLength="10" />
           <Property Name="Password" Type="varchar" MaxLength="10" />
+          <Property Name="IDCity" Type="int" />
         </EntityType>
         <EntityType Name="User_Animal">
           <Key>
@@ -101,6 +109,18 @@
             </Principal>
             <Dependent Role="Application_Animal">
               <PropertyRef Name="ID_Application" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applictioon_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applictioon">
+              <PropertyRef Name="IDCity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -140,6 +160,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Housing">
           <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -156,6 +188,7 @@
           <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Applictioon" EntityType="Self.Applictioon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Housing" EntityType="Self.Housing" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
@@ -168,6 +201,10 @@
             <End Role="Applictioon" EntitySet="Applictioon" />
             <End Role="Application_Animal" EntitySet="Application_Animal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Applictioon_City" Association="Self.FK_Applictioon_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Applictioon" EntitySet="Applictioon" />
+          </AssociationSet>
           <AssociationSet Name="FK_Applictioon_User" Association="Self.FK_Applictioon_User">
             <End Role="User" EntitySet="User" />
             <End Role="Applictioon" EntitySet="Applictioon" />
@@ -179,6 +216,10 @@
           <AssociationSet Name="FK_User_Animal_User" Association="Self.FK_User_Animal_User">
             <End Role="User" EntitySet="User" />
             <End Role="User_Animal" EntitySet="User_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_City" Association="Self.FK_User_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Housing" Association="Self.FK_User_Housing">
             <End Role="Housing" EntitySet="Housing" />
@@ -221,8 +262,19 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="IDUser" Type="Int32" />
+          <Property Name="IDCity" Type="Int32" />
           <NavigationProperty Name="Application_Animal" Relationship="Self.FK_Application_Animal_Applictioon" FromRole="Applictioon" ToRole="Application_Animal" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Applictioon_City" FromRole="Applictioon" ToRole="City" />
           <NavigationProperty Name="User" Relationship="Self.FK_Applictioon_User" FromRole="Applictioon" ToRole="User" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applictioon" Relationship="Self.FK_Applictioon_City" FromRole="City" ToRole="Applictioon" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_City" FromRole="City" ToRole="User" />
         </EntityType>
         <EntityType Name="Housing">
           <Key>
@@ -260,10 +312,11 @@
           <Property Name="ThereAnimal" Type="Boolean" />
           <Property Name="ThereChildren" Type="Boolean" />
           <Property Name="NumberAnimalReceive" Type="Int32" />
-          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IDCity" Type="Int32" />
           <NavigationProperty Name="Applictioon" Relationship="Self.FK_Applictioon_User" FromRole="User" ToRole="Applictioon" />
+          <NavigationProperty Name="City" Relationship="Self.FK_User_City" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Housing" Relationship="Self.FK_User_Housing" FromRole="User" ToRole="Housing" />
           <NavigationProperty Name="User_Animal" Relationship="Self.FK_User_Animal_User" FromRole="User" ToRole="User_Animal" />
         </EntityType>
@@ -313,6 +366,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Applictioon_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applictioon">
+              <PropertyRef Name="IDCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Applictioon_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="*" />
@@ -322,6 +387,18 @@
             </Principal>
             <Dependent Role="Applictioon">
               <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_City">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDCity" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -349,10 +426,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CatsitterEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CatsitterEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Animal" EntityType="Self.Animal" />
           <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" />
           <EntitySet Name="Applictioon" EntityType="Self.Applictioon" />
+          <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Housing" EntityType="Self.Housing" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -369,9 +447,17 @@
             <End Role="Applictioon" EntitySet="Applictioon" />
             <End Role="Application_Animal" EntitySet="Application_Animal" />
           </AssociationSet>
+          <AssociationSet Name="FK_Applictioon_City" Association="Self.FK_Applictioon_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Applictioon" EntitySet="Applictioon" />
+          </AssociationSet>
           <AssociationSet Name="FK_Applictioon_User" Association="Self.FK_Applictioon_User">
             <End Role="User" EntitySet="User" />
             <End Role="Applictioon" EntitySet="Applictioon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_City" Association="Self.FK_User_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Housing" Association="Self.FK_User_Housing">
             <End Role="Housing" EntitySet="Housing" />
@@ -387,7 +473,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CatsitterModelContainer" CdmEntityContainer="CatsitterEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CatsitterModelContainer" CdmEntityContainer="CatsitterEntities2">
           <EntitySetMapping Name="Animal">
             <EntityTypeMapping TypeName="CatsitterModel.Animal">
               <MappingFragment StoreEntitySet="Animal">
@@ -416,6 +502,15 @@
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDCity" ColumnName="IDCity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="CatsitterModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -455,9 +550,9 @@
                 <ScalarProperty Name="ThereAnimal" ColumnName="ThereAnimal" />
                 <ScalarProperty Name="ThereChildren" ColumnName="ThereChildren" />
                 <ScalarProperty Name="NumberAnimalReceive" ColumnName="NumberAnimalReceive" />
-                <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IDCity" ColumnName="IDCity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

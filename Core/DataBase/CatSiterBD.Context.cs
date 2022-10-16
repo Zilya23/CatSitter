@@ -13,10 +13,10 @@ namespace Core.DataBase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CatsitterEntities1 : DbContext
+    public partial class CatsitterEntities2 : DbContext
     {
-        public CatsitterEntities1()
-            : base("name=CatsitterEntities1")
+        public CatsitterEntities2()
+            : base("name=CatsitterEntities2")
         {
         }
     
@@ -28,6 +28,7 @@ namespace Core.DataBase
         public virtual DbSet<Animal> Animal { get; set; }
         public virtual DbSet<Application_Animal> Application_Animal { get; set; }
         public virtual DbSet<Applictioon> Applictioon { get; set; }
+        public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Housing> Housing { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<User> User { get; set; }

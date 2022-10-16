@@ -28,9 +28,11 @@ namespace Core.DataBase
         public Nullable<decimal> Price { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<int> IDUser { get; set; }
+        public Nullable<int> IDCity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application_Animal> Application_Animal { get; set; }
+        public virtual City City { get; set; }
         public virtual User User { get; set; }
     }
 }

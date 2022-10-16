@@ -18,11 +18,33 @@
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <DockPanel MinWidth="350">
-                    <TextBlock Text="Меню"
+                    <StackPanel>
+                        <TextBlock Text="Меню"
                                HorizontalAlignment="Center"
                                FontSize="30"
                                Foreground="#FFB48A8E"
                                Margin="10"/>
+                        <Button x:Name="btnCatsitter"
+                                Content="Стать кэтситтером"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"
+                                Click="btnCatsitter_Click"/>
+                        <Button x:Name="btnExit"
+                                Content="Выход"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"
+                                Click="btnExit_Click"/>
+                    </StackPanel>
                 </DockPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
 
