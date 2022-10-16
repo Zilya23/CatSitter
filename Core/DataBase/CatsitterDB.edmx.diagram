@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28164cbaf5584a459be503af1268b95d" Name="Diagram1">
+        <EntityTypeShape EntityType="CatsitterModel.Animal" Width="1.5" PointX="6" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.Application_Animal" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.Applictioon" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.Housing" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.User" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatsitterModel.User_Animal" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CatsitterModel.FK_Application_Animal_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="CatsitterModel.FK_User_Animal_Animal" ManuallyRouted="false" />
+        <AssociationConnector Association="CatsitterModel.FK_Application_Animal_Applictioon" ManuallyRouted="false" />
+        <AssociationConnector Association="CatsitterModel.FK_Applictioon_User" ManuallyRouted="false" />
+        <AssociationConnector Association="CatsitterModel.FK_User_Housing" ManuallyRouted="false" />
+        <AssociationConnector Association="CatsitterModel.FK_User_Animal_User" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

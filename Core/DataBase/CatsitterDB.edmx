@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CatsitterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Application_Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Animal" Type="int" />
+          <Property Name="ID_Application" Type="int" />
+        </EntityType>
+        <EntityType Name="Applictioon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IDUser" Type="int" />
+        </EntityType>
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="30" />
+          <Property Name="DateRegist" Type="date" />
+          <Property Name="Telephone" Type="varchar" MaxLength="12" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Address" Type="varchar" MaxLength="70" />
+          <Property Name="CaringExperience" Type="int" />
+          <Property Name="IDHousing" Type="int" />
+          <Property Name="ThereAnimal" Type="bit" />
+          <Property Name="ThereChildren" Type="bit" />
+          <Property Name="NumberAnimalReceive" Type="int" />
+          <Property Name="City" Type="varchar" MaxLength="20" />
+          <Property Name="Login" Type="varchar" MaxLength="10" />
+          <Property Name="Password" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="User_Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="IDAnimal" Type="int" />
+        </EntityType>
+        <Association Name="FK_Application_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="Application_Animal" Type="Self.Application_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Animal">
+              <PropertyRef Name="ID_Animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Animal_Applictioon">
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="0..1" />
+          <End Role="Application_Animal" Type="Self.Application_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applictioon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Animal">
+              <PropertyRef Name="ID_Application" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applictioon_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applictioon">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="User_Animal" Type="Self.User_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Animal">
+              <PropertyRef Name="IDAnimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Animal_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User_Animal" Type="Self.User_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Animal">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Housing">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDHousing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CatsitterModelContainer">
+          <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Applictioon" EntityType="Self.Applictioon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Housing" EntityType="Self.Housing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Animal" EntityType="Self.User_Animal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Application_Animal_Animal" Association="Self.FK_Application_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Application_Animal" EntitySet="Application_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Animal_Applictioon" Association="Self.FK_Application_Animal_Applictioon">
+            <End Role="Applictioon" EntitySet="Applictioon" />
+            <End Role="Application_Animal" EntitySet="Application_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applictioon_User" Association="Self.FK_Applictioon_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Applictioon" EntitySet="Applictioon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Animal_Animal" Association="Self.FK_User_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="User_Animal" EntitySet="User_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Animal_User" Association="Self.FK_User_Animal_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Animal" EntitySet="User_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Housing" Association="Self.FK_User_Housing">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CatsitterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Application_Animal" Relationship="Self.FK_Application_Animal_Animal" FromRole="Animal" ToRole="Application_Animal" />
+          <NavigationProperty Name="User_Animal" Relationship="Self.FK_User_Animal_Animal" FromRole="Animal" ToRole="User_Animal" />
+        </EntityType>
+        <EntityType Name="Application_Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Animal" Type="Int32" />
+          <Property Name="ID_Application" Type="Int32" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK_Application_Animal_Animal" FromRole="Application_Animal" ToRole="Animal" />
+          <NavigationProperty Name="Applictioon" Relationship="Self.FK_Application_Animal_Applictioon" FromRole="Application_Animal" ToRole="Applictioon" />
+        </EntityType>
+        <EntityType Name="Applictioon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IDUser" Type="Int32" />
+          <NavigationProperty Name="Application_Animal" Relationship="Self.FK_Application_Animal_Applictioon" FromRole="Applictioon" ToRole="Application_Animal" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Applictioon_User" FromRole="Applictioon" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Housing">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Housing" FromRole="Housing" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DateRegist" Type="DateTime" Precision="0" />
+          <Property Name="Telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="CaringExperience" Type="Int32" />
+          <Property Name="IDHousing" Type="Int32" />
+          <Property Name="ThereAnimal" Type="Boolean" />
+          <Property Name="ThereChildren" Type="Boolean" />
+          <Property Name="NumberAnimalReceive" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Applictioon" Relationship="Self.FK_Applictioon_User" FromRole="User" ToRole="Applictioon" />
+          <NavigationProperty Name="Housing" Relationship="Self.FK_User_Housing" FromRole="User" ToRole="Housing" />
+          <NavigationProperty Name="User_Animal" Relationship="Self.FK_User_Animal_User" FromRole="User" ToRole="User_Animal" />
+        </EntityType>
+        <EntityType Name="User_Animal">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="IDAnimal" Type="Int32" />
+          <NavigationProperty Name="Animal" Relationship="Self.FK_User_Animal_Animal" FromRole="User_Animal" ToRole="Animal" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Animal_User" FromRole="User_Animal" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Application_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="Application_Animal" Type="Self.Application_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Animal">
+              <PropertyRef Name="ID_Animal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Animal_Animal">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
+          <End Role="User_Animal" Type="Self.User_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Animal">
+              <PropertyRef Name="IDAnimal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Application_Animal_Applictioon">
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="0..1" />
+          <End Role="Application_Animal" Type="Self.Application_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applictioon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application_Animal">
+              <PropertyRef Name="ID_Application" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Applictioon_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Applictioon">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Housing">
+          <End Role="Housing" Type="Self.Housing" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Housing">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IDHousing" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Animal_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User_Animal" Type="Self.User_Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Animal">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatsitterEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animal" EntityType="Self.Animal" />
+          <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" />
+          <EntitySet Name="Applictioon" EntityType="Self.Applictioon" />
+          <EntitySet Name="Housing" EntityType="Self.Housing" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="User_Animal" EntityType="Self.User_Animal" />
+          <AssociationSet Name="FK_Application_Animal_Animal" Association="Self.FK_Application_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Application_Animal" EntitySet="Application_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Animal_Animal" Association="Self.FK_User_Animal_Animal">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="User_Animal" EntitySet="User_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Application_Animal_Applictioon" Association="Self.FK_Application_Animal_Applictioon">
+            <End Role="Applictioon" EntitySet="Applictioon" />
+            <End Role="Application_Animal" EntitySet="Application_Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Applictioon_User" Association="Self.FK_Applictioon_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Applictioon" EntitySet="Applictioon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Housing" Association="Self.FK_User_Housing">
+            <End Role="Housing" EntitySet="Housing" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Animal_User" Association="Self.FK_User_Animal_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Animal" EntitySet="User_Animal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CatsitterModelContainer" CdmEntityContainer="CatsitterEntities1">
+          <EntitySetMapping Name="Animal">
+            <EntityTypeMapping TypeName="CatsitterModel.Animal">
+              <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Application_Animal">
+            <EntityTypeMapping TypeName="CatsitterModel.Application_Animal">
+              <MappingFragment StoreEntitySet="Application_Animal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_Animal" ColumnName="ID_Animal" />
+                <ScalarProperty Name="ID_Application" ColumnName="ID_Application" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Applictioon">
+            <EntityTypeMapping TypeName="CatsitterModel.Applictioon">
+              <MappingFragment StoreEntitySet="Applictioon">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Housing">
+            <EntityTypeMapping TypeName="CatsitterModel.Housing">
+              <MappingFragment StoreEntitySet="Housing">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CatsitterModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="CatsitterModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="DateRegist" ColumnName="DateRegist" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CaringExperience" ColumnName="CaringExperience" />
+                <ScalarProperty Name="IDHousing" ColumnName="IDHousing" />
+                <ScalarProperty Name="ThereAnimal" ColumnName="ThereAnimal" />
+                <ScalarProperty Name="ThereChildren" ColumnName="ThereChildren" />
+                <ScalarProperty Name="NumberAnimalReceive" ColumnName="NumberAnimalReceive" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Animal">
+            <EntityTypeMapping TypeName="CatsitterModel.User_Animal">
+              <MappingFragment StoreEntitySet="User_Animal">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDAnimal" ColumnName="IDAnimal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
