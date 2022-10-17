@@ -91,6 +91,7 @@
     <Compile Include="DataBase\User_Animal.cs">
       <DependentUpon>CatSiterBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Functions\AnimalFunction.cs" />
     <Compile Include="Functions\ApplicationFunction.cs" />
     <Compile Include="Functions\AuthorizationFunction.cs" />
     <Compile Include="Functions\HousingFunction.cs" />

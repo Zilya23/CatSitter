@@ -22,6 +22,7 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class AuthorizationPage : Page
     {
+        public static User user;
         public AuthorizationPage()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace CatSitter.Pages
         {
             string login = tbLogin.Text.Trim();
             string password = pbPassword.Password.Trim();
-            User user = AuthorizationFunction.Authorization(login, password);
+            user = AuthorizationFunction.Authorization(login, password);
             if(user != null)
             {
                 NavigationService.Navigate(new ApplicationPage());
