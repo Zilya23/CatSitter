@@ -119,7 +119,16 @@ namespace CatSitter.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
+            User user = AuthorizationPage.user;
+            user.CaringExperience = Convert.ToInt32(tbYears.Text);
+            if(cbHousing.SelectedItem != null)
+            {
+                user.IDHousing = (cbHousing.SelectedItem as Housing).ID;
+            }
+            user.ThereAnimal = cbAnimal.IsChecked;
+            user.ThereChildren = cbChildren.IsChecked;
+            user.NumberAnimalReceive = Convert.ToInt32(tbAnimalCount.Text);
+            bd_connection.connection.SaveChanges();
         }
     }
 }
