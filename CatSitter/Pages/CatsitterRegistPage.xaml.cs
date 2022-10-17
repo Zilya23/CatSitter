@@ -24,7 +24,7 @@ namespace CatSitter.Pages
     {
         List<Housing> housings { get; set; }
         List<Animal> animals { get; set; }
-        List<User_Animal> user_Animals = new List<User_Animal>();
+        //List<User_Animal> user_Animals = new List<User_Animal>();
         public CatsitterRegistPage()
         {
             InitializeComponent();
@@ -35,6 +35,8 @@ namespace CatSitter.Pages
             animals = AnimalFunction.GetAnimals();
             cbTypeAnimal.ItemsSource = animals;
             cbTypeAnimal.DisplayMemberPath = "Name";
+
+            this.DataContext = this;
         }
 
         private void btnCatsitter_Click(object sender, RoutedEventArgs e)
@@ -44,6 +46,8 @@ namespace CatSitter.Pages
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
+            bd_connection.connection = new CatSitterEntities();
+            AuthorizationPage.user = null;
             NavigationService.Navigate(new AuthorizationPage());
         }
 
@@ -85,44 +89,32 @@ namespace CatSitter.Pages
                 Animal selectAnimal = cbTypeAnimal.SelectedItem as Animal;
                 animalUser.IDUser = AuthorizationPage.user.ID;
                 animalUser.IDAnimal = selectAnimal.ID;
-                var isAnimal = user_Animals.Where(x => x.IDAnimal == animalUser.IDAnimal && x.IDUser == animalUser.IDUser).Count();
-                if(isAnimal == 0)
+                var isAnimal = AnimalFunction.AnimaleUniq((int)animalUser.IDUser, (int)animalUser.IDAnimal);
+                if (isAnimal == 0)
                 {
-                    user_Animals.Add(animalUser);
-                    UpdateAnimal();
+                    //AuthorizationPage.user.User_Animal.Add(new User_Animal() { User = AuthorizationPage.user, Animal = cbTypeAnimal.SelectedItem as Animal });
+                    AnimalFunction.SaveAnimalUser(animalUser);
                 }
-                //var isAnimal = AnimalFunction.AnimaleUniq((int)animalUser.IDUser, (int)animalUser.IDAnimal);
-                //if (isAnimal == 0)
-                //{
-                //    AnimalFunction.SaveAnimalUser(animalUser);
-                //    UpdateAnimal();
-                //}
+                UpdateAnimal();
             }
         }
 
-        private void btn_del_country_Click(object sender, RoutedEventArgs e)
+        private void btn_del_Animal_Click(object sender, RoutedEventArgs e)
         {
-            if(lvAnimal.SelectedItem != null)
+            if (lvAnimal.SelectedItem != null)
             {
                 int IDUser = AuthorizationPage.user.ID;
                 int IDAnimal = (int)(lvAnimal.SelectedItem as User_Animal).IDAnimal;
-                var selectUserAnimal = user_Animals.Find(x => x.IDUser == IDUser && x.IDAnimal == IDAnimal);
-                user_Animals.Remove(selectUserAnimal);
+                //AnimalFunction.DeleteUserAnimal(IDUser, IDAnimal);
+                AnimalFunction.DeleteUserAnimal(AuthorizationPage.user, lvAnimal.SelectedItem as User_Animal);
                 UpdateAnimal();
             }
-            //if(lvAnimal.SelectedItem != null)
-            //{
-            //    int IDUser = AuthorizationPage.user.ID;
-            //    int IDAnimal = (int)(lvAnimal.SelectedItem as User_Animal).IDAnimal;
-            //    AnimalFunction.DeleteUserAnimal(IDUser, IDAnimal);
-            //    UpdateAnimal();
-            //}
         }
 
         public void UpdateAnimal()
         {
-            //lvAnimal.ItemsSource = AnimalFunction.GetUserAnimals(AuthorizationPage.user.ID);
-            lvAnimal.ItemsSource = user_Animals.ToList();
+            lvAnimal.ItemsSource = AuthorizationPage.user.User_Animal;
+            lvAnimal.Items.Refresh();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

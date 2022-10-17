@@ -230,7 +230,7 @@
                     <StackPanel x:Name="spTypeAnimal" 
                                 Grid.Column="3" 
                                 Grid.Row="6" Grid.RowSpan="2">
-                        <ListView x:Name="lvAnimal" 
+                        <ListView x:Name="lvAnimal"
                                   Width="300" 
                                   Height="100">
                             <ListView.ItemTemplate>
@@ -249,7 +249,7 @@
                                 Background="#FFE4D5D0"/>
                         <Button x:Name="btnDelAmimal" 
                                 Content="Удалить животное" 
-                                Click="btn_del_country_Click"
+                                Click="btn_del_Animal_Click"
                                 Foreground="#FF6A6D6C"
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"/>

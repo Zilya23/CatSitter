@@ -11,7 +11,7 @@ namespace Core.Functions
     {
         public static User Authorization(string login, string password)
         {
-            User user = bd_connection.connection.User.Where(x => x.Password == password && x.Login == login).FirstOrDefault();
+            User user = bd_connection.connection.User.FirstOrDefault(x => x.Password == password && x.Login == login);
             return user;
         }
     }

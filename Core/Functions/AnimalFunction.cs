@@ -16,13 +16,12 @@ namespace Core.Functions
 
         public static int AnimaleUniq(int IDUser, int IDAnimal)
         {
-            return bd_connection.connection.User_Animal.Where(x => x.IDAnimal == IDAnimal && x.IDUser == IDUser).Count();
+            return bd_connection.connection.User_Animal.Count(x => x.IDAnimal == IDAnimal && x.IDUser == IDUser);
         }
 
         public static void SaveAnimalUser(User_Animal userAnimal)
         {
             bd_connection.connection.User_Animal.Add(userAnimal);
-            bd_connection.connection.SaveChanges();
         }
 
         public static List<User_Animal> GetUserAnimals(int IDUser)
@@ -34,7 +33,14 @@ namespace Core.Functions
         {
             var selectUserAnimal = bd_connection.connection.User_Animal.ToList().Find(x => x.IDUser == IDUser && x.IDAnimal == IDAnimal);
             bd_connection.connection.User_Animal.Remove(selectUserAnimal);
-            bd_connection.connection.SaveChanges();
+        }
+
+        public static void DeleteUserAnimal(User user, User_Animal animal)
+        {
+            var selectedAnimal = user.User_Animal.FirstOrDefault(x => x.IDAnimal == animal.IDAnimal && x.IDUser == animal.IDUser);
+            //bd_connection.connection.User_Animal.Remove(selectedAnimal);
+            user.User_Animal.Remove(selectedAnimal);
+            //animal.User = null;
         }
     }
 }

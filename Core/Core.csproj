@@ -52,59 +52,57 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataBase\Animal.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Application_Animal.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Applictioon.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\bd_connection.cs" />
-    <Compile Include="DataBase\CatSiterBD.Context.cs">
+    <Compile Include="DataBase\CattSiter.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatSiterBD.Context.tt</DependentUpon>
+      <DependentUpon>CattSiter.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CatSiterBD.cs">
+    <Compile Include="DataBase\CattSiter.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CatSiterBD.Designer.cs">
+    <Compile Include="DataBase\CattSiter.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CatSiterBD.edmx</DependentUpon>
+      <DependentUpon>CattSiter.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataBase\City.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Housing.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DataBase\sysdiagrams.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User_Animal.cs">
-      <DependentUpon>CatSiterBD.tt</DependentUpon>
+      <DependentUpon>CattSiter.tt</DependentUpon>
     </Compile>
     <Compile Include="Functions\AnimalFunction.cs" />
     <Compile Include="Functions\ApplicationFunction.cs" />
     <Compile Include="Functions\AuthorizationFunction.cs" />
     <Compile Include="Functions\HousingFunction.cs" />
+    <Compile Include="Functions\UserFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DataBase\CatSiterBD.edmx">
+    <EntityDeploy Include="DataBase\CattSiter.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CatSiterBD.Designer.cs</LastGenOutput>
+      <LastGenOutput>CattSiter.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataBase\CatSiterBD.edmx.diagram">
-      <DependentUpon>CatSiterBD.edmx</DependentUpon>
+    <None Include="DataBase\CattSiter.edmx.diagram">
+      <DependentUpon>CattSiter.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -112,15 +110,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataBase\CatSiterBD.Context.tt">
+    <Content Include="DataBase\CattSiter.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CatSiterBD.edmx</DependentUpon>
-      <LastGenOutput>CatSiterBD.Context.cs</LastGenOutput>
+      <DependentUpon>CattSiter.edmx</DependentUpon>
+      <LastGenOutput>CattSiter.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataBase\CatSiterBD.tt">
+    <Content Include="DataBase\CattSiter.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CatSiterBD.edmx</DependentUpon>
-      <LastGenOutput>CatSiterBD.cs</LastGenOutput>
+      <DependentUpon>CattSiter.edmx</DependentUpon>
+      <LastGenOutput>CattSiter.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
