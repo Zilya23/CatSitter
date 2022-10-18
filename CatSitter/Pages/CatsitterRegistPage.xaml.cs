@@ -24,7 +24,6 @@ namespace CatSitter.Pages
     {
         List<Housing> housings { get; set; }
         List<Animal> animals { get; set; }
-        //List<User_Animal> user_Animals = new List<User_Animal>();
         public CatsitterRegistPage()
         {
             InitializeComponent();
@@ -35,6 +34,15 @@ namespace CatSitter.Pages
             animals = AnimalFunction.GetAnimals();
             cbTypeAnimal.ItemsSource = animals;
             cbTypeAnimal.DisplayMemberPath = "Name";
+
+            cbHousing.SelectedItem = AuthorizationPage.user.Housing;
+            lvAnimal.ItemsSource = AuthorizationPage.user.User_Animal;
+            lvAnimal.Items.Refresh();
+
+            cbAnimal.IsChecked = AuthorizationPage.user.ThereAnimal;
+            cbChildren.IsChecked = AuthorizationPage.user.ThereChildren;
+            tbAnimalCount.Text = AuthorizationPage.user.NumberAnimalReceive.ToString();
+            tbYears.Text = AuthorizationPage.user.CaringExperience.ToString();
 
             this.DataContext = this;
         }
@@ -99,7 +107,6 @@ namespace CatSitter.Pages
             {
                 int IDUser = AuthorizationPage.user.ID;
                 int IDAnimal = (int)(lvAnimal.SelectedItem as User_Animal).IDAnimal;
-                //AnimalFunction.DeleteUserAnimal(IDUser, IDAnimal);
                 AnimalFunction.DeleteUserAnimal(AuthorizationPage.user, lvAnimal.SelectedItem as User_Animal);
                 UpdateAnimal();
             }
@@ -123,6 +130,7 @@ namespace CatSitter.Pages
             user.ThereChildren = cbChildren.IsChecked;
             user.NumberAnimalReceive = Convert.ToInt32(tbAnimalCount.Text);
             bd_connection.connection.SaveChanges();
+            bd_connection.connection = new CatSitterEntities();
             bd_connection.connection = new CatSitterEntities();
             NavigationService.Navigate(new ApplicationPage());
         }

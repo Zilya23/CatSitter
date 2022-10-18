@@ -38,7 +38,11 @@ namespace CatSitter.Pages
 
         private void lvApplication_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if(lvApplication.SelectedItem != null)
+            {
+                Applictioon applictioon = lvApplication.SelectedItem as Applictioon;
+                NavigationService.Navigate(new ViewApplicationPage(applictioon));
+            }
         }
 
         private void btnCatsitter_Click(object sender, RoutedEventArgs e)
@@ -57,12 +61,35 @@ namespace CatSitter.Pages
             if(cbCity.SelectedIndex > 0)
             {
                 var city = cbCity.SelectedItem as City;
-                lvApplication.ItemsSource = bd_connection.connection.Applictioon.Where(a => a.IDCity == city.ID).ToList();
+                var listsity = bd_connection.connection.Applictioon.Where(a => a.IDCity == city.ID).ToList();
+                lvApplication.ItemsSource = listsity;
+                if (listsity.Count == 0)
+                {
+                    tbEmpty.Visibility = Visibility;
+                }
+                else
+                {
+                    tbEmpty.Visibility = Visibility.Hidden;
+                }
             }
             else if(cbCity.SelectedIndex == 0)
             {
-                lvApplication.ItemsSource = ApplicationFunction.GetApplications();
+                var listsity = ApplicationFunction.GetApplications();
+                lvApplication.ItemsSource = listsity;
+                if (listsity.Count == 0)
+                {
+                    tbEmpty.Visibility = Visibility;
+                }
+                else
+                {
+                    tbEmpty.Visibility = Visibility.Hidden;
+                }
             }
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddApplication());
         }
     }
 }

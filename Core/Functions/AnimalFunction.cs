@@ -38,9 +38,7 @@ namespace Core.Functions
         public static void DeleteUserAnimal(User user, User_Animal animal)
         {
             var selectedAnimal = user.User_Animal.FirstOrDefault(x => x.IDAnimal == animal.IDAnimal && x.IDUser == animal.IDUser);
-            //bd_connection.connection.User_Animal.Remove(selectedAnimal);
             user.User_Animal.Remove(selectedAnimal);
-            //animal.User = null;
         }
     }
 }
