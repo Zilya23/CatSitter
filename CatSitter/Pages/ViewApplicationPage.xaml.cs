@@ -21,9 +21,15 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class ViewApplicationPage : Page
     {
+        public static Applictioon application {get; set;}
         public ViewApplicationPage(Applictioon applictioon)
         {
             InitializeComponent();
+            application = applictioon;
+
+            tbDate.Text = " С " + application.StartDate.ToString().Split(' ')[0] + " по " + application.EndDate.ToString().Split(' ')[0];
+
+            this.DataContext = application;
         }
         private void btnApplication_Click(object sender, RoutedEventArgs e)
         {

@@ -35,14 +35,17 @@ namespace CatSitter.Pages
             cbTypeAnimal.ItemsSource = animals;
             cbTypeAnimal.DisplayMemberPath = "Name";
 
-            cbHousing.SelectedItem = AuthorizationPage.user.Housing;
-            lvAnimal.ItemsSource = AuthorizationPage.user.User_Animal;
-            lvAnimal.Items.Refresh();
+            if (AuthorizationPage.user.CaringExperience != null)
+            {
+                cbHousing.SelectedItem = AuthorizationPage.user.Housing;
+                lvAnimal.ItemsSource = AuthorizationPage.user.User_Animal;
+                lvAnimal.Items.Refresh();
 
-            cbAnimal.IsChecked = AuthorizationPage.user.ThereAnimal;
-            cbChildren.IsChecked = AuthorizationPage.user.ThereChildren;
-            tbAnimalCount.Text = AuthorizationPage.user.NumberAnimalReceive.ToString();
-            tbYears.Text = AuthorizationPage.user.CaringExperience.ToString();
+                cbAnimal.IsChecked = AuthorizationPage.user.ThereAnimal;
+                cbChildren.IsChecked = AuthorizationPage.user.ThereChildren;
+                tbAnimalCount.Text = AuthorizationPage.user.NumberAnimalReceive.ToString();
+                tbYears.Text = AuthorizationPage.user.CaringExperience.ToString();
+            }
 
             this.DataContext = this;
         }
