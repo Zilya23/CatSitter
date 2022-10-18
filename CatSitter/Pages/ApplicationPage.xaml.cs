@@ -27,8 +27,13 @@ namespace CatSitter.Pages
         {
             InitializeComponent();
             applicationList = ApplicationFunction.GetApplications();
-            this.DataContext = this;
 
+            List<City> cities = CityFunction.GetCities();
+            cities.Insert(0, new City() { ID = -1, Name = "Все" });
+            cbCity.ItemsSource = cities;
+            cbCity.DisplayMemberPath = "Name";
+
+            this.DataContext = this;
         }
 
         private void lvApplication_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,6 +50,19 @@ namespace CatSitter.Pages
         {
             bd_connection.connection = new CatSitterEntities();
             NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void cbCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(cbCity.SelectedIndex > 0)
+            {
+                var city = cbCity.SelectedItem as City;
+                lvApplication.ItemsSource = bd_connection.connection.Applictioon.Where(a => a.IDCity == city.ID).ToList();
+            }
+            else if(cbCity.SelectedIndex == 0)
+            {
+                lvApplication.ItemsSource = ApplicationFunction.GetApplications();
+            }
         }
     }
 }

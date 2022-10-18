@@ -24,8 +24,8 @@
                                FontSize="30"
                                Foreground="#FFB48A8E"
                                Margin="10"/>
-                        <Button x:Name="btnCatsitter"
-                                Content="Стать кэтситтером"
+                        <Button x:Name="btnApplication"
+                                Content="Заявки"
                                 HorizontalAlignment="Center"
                                 FontSize="30"
                                 Height="50"
@@ -33,7 +33,18 @@
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"
                                 Margin="10"
-                                Click="btnCatsitter_Click"/>
+                                Width="300"
+                                Click="btnApplication_Click" Cursor="Hand"/>
+                        <Button x:Name="btnCatsitter"
+                                Content="Стать кэтситтером"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Width="300"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"/>
                         <Button x:Name="btnExit"
                                 Content="Выход"
                                 HorizontalAlignment="Center"

@@ -24,11 +24,22 @@
                                FontSize="30"
                                Foreground="#FFB48A8E"
                                Margin="10"/>
+                        <Button x:Name="btnApplication"
+                                Content="Заявки"
+                                HorizontalAlignment="Center"
+                                FontSize="30"
+                                Height="50"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"
+                                Margin="10"
+                                Width="300"/>
                         <Button x:Name="btnCatsitter"
                                 Content="Стать кэтситтером"
                                 HorizontalAlignment="Center"
                                 FontSize="30"
                                 Height="50"
+                                Width="300"
                                 Foreground="#FF6A6D6C"
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"
@@ -81,16 +92,49 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
+
+                    <ComboBox x:Name="cbCity"
+                              Grid.Row="0"
+                              Grid.Column="5"
+                              HorizontalAlignment="Stretch"
+                              Margin="0, 0, 20, 0"
+                              VerticalAlignment="Center"
+                              SelectionChanged="cbCity_SelectionChanged"/>
+
                     <ListView x:Name="lvApplication"
                               ItemsSource="{Binding applicationList}"
                               Grid.Column="0" Grid.ColumnSpan="7"
                               Grid.Row="1" Grid.RowSpan="8"
                               FontSize="20"
                               SelectionChanged="lvApplication_SelectionChanged">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Name}"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Description}"/>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Vertical"
+                                                        HorizontalAlignment="Center"
+                                                        Width="400">
+                                                <Image Source="{Binding Photo}" 
+                                                       Width="400" 
+                                                       Height="500"
+                                                       HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Name}"
+                                                           TextWrapping="Wrap"
+                                                           FontWeight="Bold"
+                                                           HorizontalAlignment="Center"/>
+                                                <TextBlock Text="{Binding Description}" 
+                                                           TextWrapping="Wrap"
+                                                           HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
