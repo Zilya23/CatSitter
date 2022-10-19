@@ -54,7 +54,18 @@ namespace CatSitter.Pages
 
         private void btnRespond_Click(object sender, RoutedEventArgs e)
         {
-
+            User_Application userApplication = new User_Application();
+            userApplication.IDUser = AuthorizationPage.user.ID;
+            userApplication.IDApplication = application.ID;
+            if (ApplicationFunction.UniqApplicationUser((int)userApplication.IDUser, (int)userApplication.IDApplication))
+            {
+                ApplicationFunction.SaveRespond(userApplication);
+                NavigationService.Navigate(new ApplicationPage());
+            }
+            else
+            {
+                MessageBox.Show("Вы уже откликнулись на эту заявку");
+            }
         }
 
         private void btnUserApplication_Click(object sender, RoutedEventArgs e)

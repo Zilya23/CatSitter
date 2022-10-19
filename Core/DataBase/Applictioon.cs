@@ -18,6 +18,7 @@ namespace Core.DataBase
         public Applictioon()
         {
             this.Application_Animal = new HashSet<Application_Animal>();
+            this.User_Application = new HashSet<User_Application>();
         }
     
         public int ID { get; set; }
@@ -35,5 +36,7 @@ namespace Core.DataBase
         public virtual ICollection<Application_Animal> Application_Animal { get; set; }
         public virtual City City { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<User_Application> User_Application { get; set; }
     }
 }

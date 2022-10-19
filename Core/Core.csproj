@@ -52,41 +52,47 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DataBase\Animal.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Application_Animal.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Applictioon.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\bd_connection.cs" />
-    <Compile Include="DataBase\CattSiter.Context.cs">
+    <Compile Include="DataBase\Catsit.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CattSiter.Context.tt</DependentUpon>
+      <DependentUpon>Catsit.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CattSiter.cs">
+    <Compile Include="DataBase\Catsit.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\CattSiter.Designer.cs">
+    <Compile Include="DataBase\Catsit.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CattSiter.edmx</DependentUpon>
+      <DependentUpon>Catsit.edmx</DependentUpon>
     </Compile>
     <Compile Include="DataBase\City.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\Housing.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\sysdiagrams.cs">
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase\User_Animal.cs">
-      <DependentUpon>CattSiter.tt</DependentUpon>
+      <DependentUpon>Catsit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase\User_Application.cs">
+      <DependentUpon>Catsit.tt</DependentUpon>
     </Compile>
     <Compile Include="Functions\AnimalFunction.cs" />
     <Compile Include="Functions\ApplicationFunction.cs" />
@@ -98,12 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="DataBase\CattSiter.edmx">
+    <EntityDeploy Include="DataBase\Catsit.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CattSiter.Designer.cs</LastGenOutput>
+      <LastGenOutput>Catsit.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DataBase\CattSiter.edmx.diagram">
-      <DependentUpon>CattSiter.edmx</DependentUpon>
+    <None Include="DataBase\Catsit.edmx.diagram">
+      <DependentUpon>Catsit.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -111,15 +117,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataBase\CattSiter.Context.tt">
+    <Content Include="DataBase\Catsit.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CattSiter.edmx</DependentUpon>
-      <LastGenOutput>CattSiter.Context.cs</LastGenOutput>
+      <DependentUpon>Catsit.edmx</DependentUpon>
+      <LastGenOutput>Catsit.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DataBase\CattSiter.tt">
+    <Content Include="DataBase\Catsit.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CattSiter.edmx</DependentUpon>
-      <LastGenOutput>CattSiter.cs</LastGenOutput>
+      <DependentUpon>Catsit.edmx</DependentUpon>
+      <LastGenOutput>Catsit.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

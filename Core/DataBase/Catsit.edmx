@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище CatSitterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище CatSitterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Animal">
           <Key>
             <PropertyRef Name="ID" />
@@ -49,6 +49,16 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
@@ -78,6 +88,16 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDUser" Type="int" />
           <Property Name="IDAnimal" Type="int" />
+        </EntityType>
+        <EntityType Name="User_Application">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDUser" Type="int" />
+          <Property Name="IDApplication" Type="int" />
+          <Property Name="UserRespond" Type="bit" />
+          <Property Name="ApplicationRespond" Type="bit" />
         </EntityType>
         <Association Name="FK_Application_Animal_Animal">
           <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
@@ -151,6 +171,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Application_Applictioon">
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="0..1" />
+          <End Role="User_Application" Type="Self.User_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applictioon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Application">
+              <PropertyRef Name="IDApplication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Application_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User_Application" Type="Self.User_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Application">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_City">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -181,8 +225,10 @@
           <EntitySet Name="Applictioon" EntityType="Self.Applictioon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Housing" EntityType="Self.Housing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_Animal" EntityType="Self.User_Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Application" EntityType="Self.User_Application" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Application_Animal_Animal" Association="Self.FK_Application_Animal_Animal">
             <End Role="Animal" EntitySet="Animal" />
             <End Role="Application_Animal" EntitySet="Application_Animal" />
@@ -207,6 +253,14 @@
             <End Role="User" EntitySet="User" />
             <End Role="User_Animal" EntitySet="User_Animal" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Application_Applictioon" Association="Self.FK_User_Application_Applictioon">
+            <End Role="Applictioon" EntitySet="Applictioon" />
+            <End Role="User_Application" EntitySet="User_Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Application_User" Association="Self.FK_User_Application_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Application" EntitySet="User_Application" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_City" Association="Self.FK_User_City">
             <End Role="City" EntitySet="City" />
             <End Role="User" EntitySet="User" />
@@ -216,7 +270,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CatSitterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -252,10 +307,11 @@
           <Property Name="Active" Type="Boolean" />
           <Property Name="IDUser" Type="Int32" />
           <Property Name="IDCity" Type="Int32" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Application_Animal" Relationship="Self.FK_Application_Animal_Applictioon" FromRole="Applictioon" ToRole="Application_Animal" />
           <NavigationProperty Name="City" Relationship="Self.FK_Applictioon_City" FromRole="Applictioon" ToRole="City" />
           <NavigationProperty Name="User" Relationship="Self.FK_Applictioon_User" FromRole="Applictioon" ToRole="User" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="User_Application" Relationship="Self.FK_User_Application_Applictioon" FromRole="Applictioon" ToRole="User_Application" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -273,6 +329,16 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Housing" FromRole="Housing" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -299,6 +365,7 @@
           <NavigationProperty Name="City" Relationship="Self.FK_User_City" FromRole="User" ToRole="City" />
           <NavigationProperty Name="Housing" Relationship="Self.FK_User_Housing" FromRole="User" ToRole="Housing" />
           <NavigationProperty Name="User_Animal" Relationship="Self.FK_User_Animal_User" FromRole="User" ToRole="User_Animal" />
+          <NavigationProperty Name="User_Application" Relationship="Self.FK_User_Application_User" FromRole="User" ToRole="User_Application" />
         </EntityType>
         <EntityType Name="User_Animal">
           <Key>
@@ -309,6 +376,18 @@
           <Property Name="IDAnimal" Type="Int32" />
           <NavigationProperty Name="Animal" Relationship="Self.FK_User_Animal_Animal" FromRole="User_Animal" ToRole="Animal" />
           <NavigationProperty Name="User" Relationship="Self.FK_User_Animal_User" FromRole="User_Animal" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User_Application">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDUser" Type="Int32" />
+          <Property Name="IDApplication" Type="Int32" />
+          <Property Name="UserRespond" Type="Boolean" />
+          <Property Name="ApplicationRespond" Type="Boolean" />
+          <NavigationProperty Name="Applictioon" Relationship="Self.FK_User_Application_Applictioon" FromRole="User_Application" ToRole="Applictioon" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Application_User" FromRole="User_Application" ToRole="User" />
         </EntityType>
         <Association Name="FK_Application_Animal_Animal">
           <End Role="Animal" Type="Self.Animal" Multiplicity="0..1" />
@@ -370,6 +449,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_Application_Applictioon">
+          <End Role="Applictioon" Type="Self.Applictioon" Multiplicity="0..1" />
+          <End Role="User_Application" Type="Self.User_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applictioon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Application">
+              <PropertyRef Name="IDApplication" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_City">
           <End Role="City" Type="Self.City" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -406,14 +497,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CatSitterEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_User_Application_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="User_Application" Type="Self.User_Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User_Application">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CatSitterEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Animal" EntityType="Self.Animal" />
           <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" />
           <EntitySet Name="Applictioon" EntityType="Self.Applictioon" />
           <EntitySet Name="City" EntityType="Self.City" />
           <EntitySet Name="Housing" EntityType="Self.Housing" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="User_Animal" EntityType="Self.User_Animal" />
+          <EntitySet Name="User_Application" EntityType="Self.User_Application" />
           <AssociationSet Name="FK_Application_Animal_Animal" Association="Self.FK_Application_Animal_Animal">
             <End Role="Animal" EntitySet="Animal" />
             <End Role="Application_Animal" EntitySet="Application_Animal" />
@@ -434,6 +539,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Applictioon" EntitySet="Applictioon" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Application_Applictioon" Association="Self.FK_User_Application_Applictioon">
+            <End Role="Applictioon" EntitySet="Applictioon" />
+            <End Role="User_Application" EntitySet="User_Application" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_City" Association="Self.FK_User_City">
             <End Role="City" EntitySet="City" />
             <End Role="User" EntitySet="User" />
@@ -446,13 +555,17 @@
             <End Role="User" EntitySet="User" />
             <End Role="User_Animal" EntitySet="User_Animal" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Application_User" Association="Self.FK_User_Application_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="User_Application" EntitySet="User_Application" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CatSitterModelContainer" CdmEntityContainer="CatSitterEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CatSitterModelContainer" CdmEntityContainer="CatSitterEntities1">
           <EntitySetMapping Name="Animal">
             <EntityTypeMapping TypeName="CatSitterModel.Animal">
               <MappingFragment StoreEntitySet="Animal">
@@ -473,7 +586,6 @@
           <EntitySetMapping Name="Applictioon">
             <EntityTypeMapping TypeName="CatSitterModel.Applictioon">
               <MappingFragment StoreEntitySet="Applictioon">
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -483,6 +595,7 @@
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
                 <ScalarProperty Name="IDCity" ColumnName="IDCity" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -499,6 +612,17 @@
               <MappingFragment StoreEntitySet="Housing">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CatSitterModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -531,6 +655,17 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
                 <ScalarProperty Name="IDAnimal" ColumnName="IDAnimal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Application">
+            <EntityTypeMapping TypeName="CatSitterModel.User_Application">
+              <MappingFragment StoreEntitySet="User_Application">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="IDApplication" ColumnName="IDApplication" />
+                <ScalarProperty Name="UserRespond" ColumnName="UserRespond" />
+                <ScalarProperty Name="ApplicationRespond" ColumnName="ApplicationRespond" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

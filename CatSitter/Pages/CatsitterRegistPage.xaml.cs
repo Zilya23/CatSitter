@@ -52,7 +52,7 @@ namespace CatSitter.Pages
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities();
+            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new AuthorizationPage());
         }
 
@@ -133,14 +133,13 @@ namespace CatSitter.Pages
             user.ThereChildren = cbChildren.IsChecked;
             user.NumberAnimalReceive = Convert.ToInt32(tbAnimalCount.Text);
             bd_connection.connection.SaveChanges();
-            bd_connection.connection = new CatSitterEntities();
-            bd_connection.connection = new CatSitterEntities();
+            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new ApplicationPage());
         }
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities();
+            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new ApplicationPage());
         }
 
