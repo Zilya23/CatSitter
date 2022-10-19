@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.DataBase;
+using Core.Functions;
 
 namespace CatSitter.Pages
 {
@@ -20,32 +22,35 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class RespondPage : Page
     {
+        public static List<User_Application> listRespond { get; set; }
         public RespondPage()
         {
             InitializeComponent();
+            listRespond = ApplicationFunction.GetUserRespond(AuthorizationPage.user.ID);
+            this.DataContext = this;
         }
 
         private void btnCatsitter_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new CatsitterRegistPage());
         }
 
         private void btnUserApplication_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnUserRespond_Click(object sender, RoutedEventArgs e)
-        {
-
+            NavigationService.Navigate(new UserApplicationPage());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AuthorizationPage());
         }
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ApplicationPage());
+        }
+
+        private void lvRespond_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

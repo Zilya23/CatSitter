@@ -55,8 +55,7 @@
                                 Foreground="#FF6A6D6C"
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"
-                                Margin="10"
-                                Click="btnUserApplication_Click"/>
+                                Margin="10"/>
                         <Button x:Name="btnUserRespond"
                                 Content="Ваши отклики"
                                 HorizontalAlignment="Center"

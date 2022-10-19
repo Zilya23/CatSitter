@@ -94,12 +94,12 @@ namespace CatSitter.Pages
 
         private void btnUserApplication_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new UserApplicationPage());
         }
 
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new RespondPage());
         }
     }
 }

@@ -66,8 +66,7 @@
                                 Foreground="#FF6A6D6C"
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"
-                                Margin="10"
-                                Click="btnUserRespond_Click"/>
+                                Margin="10"/>
                         <Button x:Name="btnExit"
                                 Content="Выход"
                                 HorizontalAlignment="Center"
@@ -119,6 +118,54 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <ListView x:Name="lvRespond"
+                              ItemsSource="{Binding listRespond}"
+                              Grid.Row="1" Grid.RowSpan="7"
+                              Grid.Column="0" Grid.ColumnSpan="8"
+                              FontSize="20"
+                              SelectionChanged="lvRespond_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Stretch">
+                                                <Image Source="{Binding Applictioon.Photo}" 
+                                                       Width="400" 
+                                                       Height="500"
+                                                       HorizontalAlignment="Center"/>
+                                                <StackPanel Orientation="Vertical"
+                                                            Margin="10"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Applictioon.Name}"
+                                                           TextWrapping="Wrap"
+                                                           FontWeight="Bold"
+                                                           HorizontalAlignment="Left"
+                                                           TextAlignment="Left"/>
+                                                    <TextBlock Text="{Binding Applictioon.Description}" 
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Left"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Vertical"
+                                                            VerticalAlignment="Center"
+                                                            Margin="40"
+                                                            HorizontalAlignment="Right">
+                                                    <TextBlock Text="Цена"
+                                                               HorizontalAlignment="Right"/>
+                                                    <TextBlock Text="{Binding Applictioon.Price}"
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Center"
+                                                               HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>

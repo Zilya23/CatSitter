@@ -27,27 +27,22 @@ namespace CatSitter.Pages
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new ApplicationPage());
         }
 
         private void btnCatsitter_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btnUserApplication_Click(object sender, RoutedEventArgs e)
-        {
-
+            NavigationService.Navigate(new CatsitterRegistPage());
         }
 
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new RespondPage());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AuthorizationPage());
         }
     }
 }
