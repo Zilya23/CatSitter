@@ -91,5 +91,15 @@ namespace CatSitter.Pages
         {
             NavigationService.Navigate(new AddApplication());
         }
+
+        private void btnUserApplication_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUserRespond_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

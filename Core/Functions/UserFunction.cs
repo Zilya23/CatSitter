@@ -13,5 +13,17 @@ namespace Core.Functions
         {
             bd_connection.connection.SaveChanges();
         }
+
+        public static bool CatsitterUser(User user)
+        {
+            if(user.CaringExperience != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

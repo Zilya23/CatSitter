@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core.DataBase;
+using Core.Functions;
 
 namespace CatSitter.Pages
 {
@@ -27,7 +28,12 @@ namespace CatSitter.Pages
             InitializeComponent();
             application = applictioon;
 
-            tbDate.Text = " С " + application.StartDate.ToString().Split(' ')[0] + " по " + application.EndDate.ToString().Split(' ')[0];
+            tbDate.Text = " с " + application.StartDate.ToString().Split(' ')[0] + " по " + application.EndDate.ToString().Split(' ')[0];
+
+            if(UserFunction.CatsitterUser(AuthorizationPage.user))
+            {
+                btnRespond.Visibility = Visibility.Visible;
+            }
 
             this.DataContext = application;
         }
@@ -44,6 +50,21 @@ namespace CatSitter.Pages
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void btnRespond_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUserApplication_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUserRespond_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

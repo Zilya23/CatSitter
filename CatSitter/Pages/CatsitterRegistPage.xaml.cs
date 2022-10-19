@@ -143,5 +143,15 @@ namespace CatSitter.Pages
             bd_connection.connection = new CatSitterEntities();
             NavigationService.Navigate(new ApplicationPage());
         }
+
+        private void btnUserApplication_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUserRespond_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
