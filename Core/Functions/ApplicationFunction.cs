@@ -33,5 +33,17 @@ namespace Core.Functions
                 return false;
             }
         }
+
+        public static List<User_Application> GetUserRespond(int idUser)
+        {
+            List<User_Application> userApplications = bd_connection.connection.User_Application.Where(x => x.IDUser == idUser).ToList();
+            return userApplications;
+        }
+
+        public static List<Applictioon> GetApplictioonsUser(int idUser)
+        {
+            List<Applictioon> applictioons = bd_connection.connection.Applictioon.Where(x => x.IDUser == idUser).ToList();
+            return applictioons;
+        }
     }
 }
