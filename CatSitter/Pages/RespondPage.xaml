@@ -118,6 +118,14 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
+                    <ComboBox x:Name="cbStatus"
+                              Grid.Column="7"
+                              Grid.Row="0"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Center"
+                              SelectionChanged="cbStatus_SelectionChanged"/>
+
+
                     <ListView x:Name="lvRespond"
                               ItemsSource="{Binding listRespond}"
                               Grid.Row="1" Grid.RowSpan="7"

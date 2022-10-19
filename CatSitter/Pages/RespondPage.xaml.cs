@@ -27,6 +27,10 @@ namespace CatSitter.Pages
         {
             InitializeComponent();
             listRespond = ApplicationFunction.GetUserRespond(AuthorizationPage.user.ID);
+
+            List<string> statusRespond = new List<string>(){"Все", "Одобрено", "Ждет согласования", "Отказано" };
+            cbStatus.ItemsSource = statusRespond;
+
             this.DataContext = this;
         }
 
@@ -51,6 +55,11 @@ namespace CatSitter.Pages
         }
 
         private void lvRespond_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
