@@ -56,7 +56,11 @@ namespace CatSitter.Pages
 
         private void lvRespond_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if(lvRespond.SelectedItem != null)
+            {
+                var selectApplication = (lvRespond.SelectedItem as User_Application).Applictioon;
+                NavigationService.Navigate(new ViewApplicationPage(selectApplication));
+            }
         }
 
         private void cbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
