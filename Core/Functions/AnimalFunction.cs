@@ -45,5 +45,14 @@ namespace Core.Functions
             var selectedAnimal = applictioon.Application_Animal.FirstOrDefault(x => x.ID_Animal == animal.ID_Animal && x.ID_Application == animal.ID_Application);
             applictioon.Application_Animal.Remove(selectedAnimal);
         }
+
+        public static void SaveAnimalApplicqation(List<Application_Animal> applicationAnimals)
+        {
+            foreach(var i in applicationAnimals)
+            {
+                bd_connection.connection.Application_Animal.Add(i);
+            }
+            bd_connection.connection.SaveChanges();
+        }
     }
 }

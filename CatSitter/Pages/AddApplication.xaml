@@ -200,10 +200,11 @@
                                 Grid.Row="5" Grid.RowSpan="2">
                         <ListView x:Name="lvAnimal"
                                   Width="300" 
-                                  Height="100">
+                                  Height="100"
+                                  ItemsSource="{Binding animalss}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Content="{Binding Animal.Name}" 
+                                    <Label Content="{Binding Name}" 
                                            Height="50"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>

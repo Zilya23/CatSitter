@@ -25,6 +25,8 @@ namespace CatSitter.Pages
     public partial class AddApplication : Page
     {
         public static Applictioon constApplictioon = new Applictioon();
+        public static List<Application_Animal> applications = new List<Application_Animal>();
+        public static List<Animal> animalss = new List<Animal>();
         public AddApplication()
         {
             InitializeComponent();
@@ -39,31 +41,26 @@ namespace CatSitter.Pages
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new ApplicationPage());
         }
 
         private void btnCatsitter_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new CatsitterRegistPage());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new AuthorizationPage());
         }
 
         private void btnUserApplication_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new UserApplicationPage());
         }
 
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new RespondPage());
         }
 
@@ -91,8 +88,8 @@ namespace CatSitter.Pages
             constApplictioon.IDUser = AuthorizationPage.user.ID;
             constApplictioon.Active = true;
             ApplicationFunction.AddApplication(constApplictioon);
+            AnimalFunction.SaveAnimalApplicqation(applications);
             MessageBox.Show("Успешно!");
-            bd_connection.connection = new CatSitterEntities1();
             NavigationService.Navigate(new ApplicationPage());
         }
 
@@ -100,10 +97,12 @@ namespace CatSitter.Pages
         {
             if (lvAnimal.SelectedItem != null)
             {
-                int IDAnimal = (int)(lvAnimal.SelectedItem as User_Animal).IDAnimal;
-                AnimalFunction.DeleteApplicationAnimal(constApplictioon, lvAnimal.SelectedItem as Application_Animal);
-                UpdateAnimal();
+                var IDAnimal = lvAnimal.SelectedItem as Animal;
+                Application_Animal application = applications.Where(x => x.ID_Animal == IDAnimal.ID).FirstOrDefault();
+                applications.Remove(application);
+                animalss.Remove(IDAnimal);
             }
+            UpdateAnimal();
         }
 
         private void btnAddAnimal_Click(object sender, RoutedEventArgs e)
@@ -114,18 +113,19 @@ namespace CatSitter.Pages
                 Animal selectAnimal = cbTypeAnimal.SelectedItem as Animal;
                 animalApplication.ID_Application = constApplictioon.ID;
                 animalApplication.ID_Animal = selectAnimal.ID;
-                var isAnimal = AnimalFunction.AnimaleUniqApp((int)animalApplication.ID_Application, (int)animalApplication.ID_Animal);
+                var isAnimal = applications.Where(x => x.ID_Application == animalApplication.ID_Application && x.ID_Animal == animalApplication.ID_Animal).Count();
                 if (isAnimal == 0)
                 {
-                    AnimalFunction.SaveAnimalApplication(animalApplication);
+                    applications.Add(animalApplication);
+                    animalss.Add(cbTypeAnimal.SelectedItem as Animal);
                 }
-                UpdateAnimal();
             }
+            UpdateAnimal();
         }
 
         public void UpdateAnimal()
         {
-            lvAnimal.ItemsSource = constApplictioon.Application_Animal;
+            lvAnimal.ItemsSource = animalss;
             lvAnimal.Items.Refresh();
         }
     }
