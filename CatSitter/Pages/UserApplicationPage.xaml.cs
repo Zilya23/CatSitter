@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core.DataBase;
+using Core.Functions;
 
 namespace CatSitter.Pages
 {
@@ -20,9 +22,13 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class UserApplicationPage : Page
     {
+        public static List<Applictioon> listApplication { get; set; }
         public UserApplicationPage()
         {
             InitializeComponent();
+            listApplication = ApplicationFunction.GetApplictioonsUser(AuthorizationPage.user.ID);
+
+            this.DataContext = this;
         }
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
@@ -43,6 +49,12 @@ namespace CatSitter.Pages
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AuthorizationPage());
+        }
+
+        private void lvUserApplication_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectApplication = lvUserApplication.SelectedItem as Applictioon;
+            NavigationService.Navigate(new ViewApplicationPage(selectApplication));
         }
     }
 }

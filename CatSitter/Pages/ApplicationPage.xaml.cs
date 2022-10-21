@@ -33,6 +33,20 @@ namespace CatSitter.Pages
             cbCity.ItemsSource = cities;
             cbCity.DisplayMemberPath = "Name";
 
+            List<Item> priceItem = new List<Item>();
+            priceItem.Add(new Item() { ID = 0, Name = "Все" });
+            priceItem.Add(new Item() { ID = 1, Name = "По возрастанию"});
+            priceItem.Add(new Item() { ID = 2, Name = "По убыванию" });
+            cbPrice.ItemsSource = priceItem;
+            cbPrice.DisplayMemberPath = "Name";
+
+            List<Item> dateItem = new List<Item>();
+            dateItem.Add(new Item() { ID = 0, Name = "Все" });
+            dateItem.Add(new Item() { ID = 1, Name = "По возрастанию" });
+            dateItem.Add(new Item() { ID = 2, Name = "По убыванию" });
+            cbDate.ItemsSource = dateItem;
+            cbDate.DisplayMemberPath = "Name";
+
             this.DataContext = this;
         }
 
@@ -58,33 +72,7 @@ namespace CatSitter.Pages
 
         private void cbCity_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cbCity.SelectedIndex > 0)
-            {
-                var city = cbCity.SelectedItem as City;
-                var listsity = bd_connection.connection.Applictioon.Where(a => a.IDCity == city.ID).ToList();
-                lvApplication.ItemsSource = listsity;
-                if (listsity.Count == 0)
-                {
-                    tbEmpty.Visibility = Visibility;
-                }
-                else
-                {
-                    tbEmpty.Visibility = Visibility.Hidden;
-                }
-            }
-            else if(cbCity.SelectedIndex == 0)
-            {
-                var listsity = ApplicationFunction.GetApplications();
-                lvApplication.ItemsSource = listsity;
-                if (listsity.Count == 0)
-                {
-                    tbEmpty.Visibility = Visibility;
-                }
-                else
-                {
-                    tbEmpty.Visibility = Visibility.Hidden;
-                }
-            }
+            Filter();
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -100,6 +88,76 @@ namespace CatSitter.Pages
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new RespondPage());
+        }
+
+        private void cbPrice_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        public void Filter()
+        {
+            List<Applictioon> listFilter = ApplicationFunction.GetApplications();
+
+            if (cbCity.SelectedIndex > 0)
+            {
+                var city = cbCity.SelectedItem as City;
+                listFilter = listFilter.Where(a => a.IDCity == city.ID).ToList();
+            }
+            else if (cbCity.SelectedIndex == 0)
+            {
+                listFilter = ApplicationFunction.GetApplications();
+                lvApplication.ItemsSource = listFilter;
+            }
+
+            if(cbPrice.SelectedIndex > 0)
+            {
+                var price = cbPrice.SelectedItem as Item;
+                if(price.ID == 1)
+                {
+                    listFilter = listFilter.OrderBy(c => c.Price).ToList();
+                }
+                else if(price.ID == 2)
+                {
+                    listFilter = listFilter.OrderByDescending(c => c.Price).ToList();
+                }
+            }
+
+
+            if(cbDate.SelectedIndex > 0)
+            {
+                var dateApplication = cbDate.SelectedItem as Item;
+                if(dateApplication.ID == 1)
+                {
+                    listFilter = listFilter.OrderBy(c => c.StartDate).ToList();
+                }
+                else if(dateApplication.ID == 2)
+                {
+                    listFilter = listFilter.OrderByDescending(c => c.StartDate).ToList();
+                }
+            }
+
+            if (listFilter.Count == 0)
+            {
+                tbEmpty.Visibility = Visibility;
+            }
+            else
+            {
+                tbEmpty.Visibility = Visibility.Hidden;
+            }
+
+            lvApplication.ItemsSource = listFilter;
+        }
+
+        public class Item
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+        }
+
+        private void cbDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
         }
     }
 }

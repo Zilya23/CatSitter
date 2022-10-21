@@ -117,7 +117,54 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-
+                    <ListView x:Name="lvUserApplication"
+                              ItemsSource="{Binding listApplication}"
+                              Grid.Row="1" Grid.RowSpan="7"
+                              Grid.Column="0" Grid.ColumnSpan="8"
+                              FontSize="20"
+                              SelectionChanged="lvUserApplication_SelectionChanged">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal"
+                                                        HorizontalAlignment="Stretch">
+                                                <Image Source="{Binding Photo}" 
+                                                       Width="400" 
+                                                       Height="500"
+                                                       HorizontalAlignment="Center"/>
+                                                <StackPanel Orientation="Vertical"
+                                                            Margin="10"
+                                                            HorizontalAlignment="Left"
+                                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding Name}"
+                                                           TextWrapping="Wrap"
+                                                           FontWeight="Bold"
+                                                           HorizontalAlignment="Left"
+                                                           TextAlignment="Left"/>
+                                                    <TextBlock Text="{Binding Description}" 
+                                                           TextWrapping="Wrap"
+                                                           TextAlignment="Left"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Vertical"
+                                                            VerticalAlignment="Center"
+                                                            Margin="40"
+                                                            HorizontalAlignment="Right">
+                                                    <TextBlock Text="Цена"
+                                                               HorizontalAlignment="Right"/>
+                                                    <TextBlock Text="{Binding Price}"
+                                                               TextWrapping="Wrap"
+                                                               TextAlignment="Center"
+                                                               HorizontalAlignment="Right"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>

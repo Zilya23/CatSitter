@@ -45,5 +45,10 @@ namespace Core.Functions
             List<Applictioon> applictioons = bd_connection.connection.Applictioon.Where(x => x.IDUser == idUser).ToList();
             return applictioons;
         }
+
+        public static bool IsYou(User user, Applictioon applictioon)
+        {
+            return applictioon.User == user;
+        }
     }
 }

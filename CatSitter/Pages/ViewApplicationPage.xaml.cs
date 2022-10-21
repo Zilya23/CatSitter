@@ -35,7 +35,12 @@ namespace CatSitter.Pages
                 btnRespond.Visibility = Visibility.Visible;
             }
 
-            if (ApplicationFunction.UniqApplicationUser(AuthorizationPage.user.ID, application.ID) == false)
+            if (!ApplicationFunction.UniqApplicationUser(AuthorizationPage.user.ID, application.ID))
+            {
+                btnRespond.Visibility = Visibility.Hidden;
+            }
+
+            if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
             {
                 btnRespond.Visibility = Visibility.Hidden;
             }
