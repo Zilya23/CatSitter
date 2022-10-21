@@ -45,6 +45,11 @@ namespace CatSitter.Pages
                 btnRespond.Visibility = Visibility.Hidden;
             }
 
+            if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
+            {
+                btnDelete.Visibility = Visibility.Visible;
+            }
+
             this.DataContext = application;
         }
         private void btnApplication_Click(object sender, RoutedEventArgs e)
@@ -78,14 +83,15 @@ namespace CatSitter.Pages
             }
         }
 
-        private void btnUserApplication_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
+            NavigationService.Navigate(new RespondPage());
+        }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationFunction.DeleteApplication(application);
+            NavigationService.Navigate(new UserApplicationPage());
         }
     }
 }

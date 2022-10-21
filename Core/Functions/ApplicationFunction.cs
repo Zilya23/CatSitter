@@ -11,7 +11,7 @@ namespace Core.Functions
     {
         public static List<Applictioon> GetApplications()
         {
-            List<Applictioon> applications = bd_connection.connection.Applictioon.Where(x => x.Active == true).ToList();
+            List<Applictioon> applications = bd_connection.connection.Applictioon.Where(x => x.Active == true && x.IsDelete != true).ToList();
             return applications;
         }
 
@@ -36,13 +36,13 @@ namespace Core.Functions
 
         public static List<User_Application> GetUserRespond(int idUser)
         {
-            List<User_Application> userApplications = bd_connection.connection.User_Application.Where(x => x.IDUser == idUser).ToList();
+            List<User_Application> userApplications = bd_connection.connection.User_Application.Where(x => x.IDUser == idUser && x.Applictioon.IsDelete != true).ToList();
             return userApplications;
         }
 
         public static List<Applictioon> GetApplictioonsUser(int idUser)
         {
-            List<Applictioon> applictioons = bd_connection.connection.Applictioon.Where(x => x.IDUser == idUser).ToList();
+            List<Applictioon> applictioons = bd_connection.connection.Applictioon.Where(x => x.IDUser == idUser && x.IsDelete != true).ToList();
             return applictioons;
         }
 
@@ -54,6 +54,12 @@ namespace Core.Functions
         public static void AddApplication(Applictioon applictioon)
         {
             bd_connection.connection.Applictioon.Add(applictioon);
+        }
+
+        public static void DeleteApplication(Applictioon applictioon)
+        {
+            applictioon.IsDelete = true;
+            bd_connection.connection.SaveChanges();
         }
     }
 }

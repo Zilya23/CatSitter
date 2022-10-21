@@ -31,6 +31,8 @@ namespace Core.DataBase
         public Nullable<int> IDUser { get; set; }
         public Nullable<int> IDCity { get; set; }
         public byte[] Photo { get; set; }
+        public Nullable<bool> IsDelete { get; set; }
+        public Nullable<int> AnimalCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Application_Animal> Application_Animal { get; set; }
