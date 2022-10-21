@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatSitter"
         mc:Ignorable="d"
-        Title="Catsitter" 
+        Title="Кэтситтер" 
         WindowState="Maximized"
         MinHeight="450" MinWidth="800">
     <Grid>
