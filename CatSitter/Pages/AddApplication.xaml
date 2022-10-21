@@ -95,6 +95,16 @@
                             IsChecked="False"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Button x:Name="btnSave"
+                                    Content="Сохранить"
+                                    HorizontalAlignment="Right"
+                                    Foreground="#FF6A6D6C"
+                                    BorderBrush="#FF6A6D6C"
+                                    Background="#FFE4D5D0"
+                                    Click="btnSave_Click"/>
+                        </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>
 
@@ -116,11 +126,121 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    
-                    
-                    
-                    
-                    
+                    <TextBox x:Name="tbName"
+                             materialDesign:HintAssist.Hint="Заголовок"  
+                             materialDesign:HintAssist.IsFloating="True"
+                             Grid.Row="0"
+                             Grid.Column="0" Grid.ColumnSpan="2"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Margin="20, 0, 0, 0"
+                             Height="55"
+                             FontSize="20"/>
+
+                    <TextBox x:Name="tbDescription"
+                             materialDesign:HintAssist.Hint="Описание"  
+                             materialDesign:HintAssist.IsFloating="True"
+                             Grid.Row="1"
+                             Grid.Column="0" Grid.ColumnSpan="2"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Visible"
+                             AcceptsReturn="True"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Margin="20, 0, 0, 0"
+                             FontSize="20"/>
+
+                    <DatePicker Name="dpStartDate"
+                                materialDesign:HintAssist.Hint="Дата начала"
+                                materialDesign:HintAssist.IsFloating="True"
+                                Grid.Column="0"
+                                Grid.Row="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="20, 0, 0, 0"
+                                Height="55"
+                                FontSize="20"/>
+
+                    <DatePicker Name="dpEndDate"
+                                materialDesign:HintAssist.Hint="Дата окончания"
+                                materialDesign:HintAssist.IsFloating="True"
+                                Grid.Column="1"
+                                Grid.Row="2"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Margin="20, 0, 0, 0"
+                                Height="55"
+                                FontSize="20"/>
+
+                    <TextBox x:Name="tbPrice"
+                             materialDesign:HintAssist.Hint="Цена"  
+                             materialDesign:HintAssist.IsFloating="True"
+                             Grid.Row="3"
+                             Grid.Column="0" Grid.ColumnSpan="2"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Visible"
+                             AcceptsReturn="True"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             Margin="20, 0, 0, 0"
+                             FontSize="20"/>
+
+                    <ComboBox x:Name="cbCity"
+                              materialDesign:HintAssist.Hint="Город"  
+                              materialDesign:HintAssist.IsFloating="True"
+                              Grid.Row="4"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Margin="20, 0, 0, 0"
+                              FontSize="20"/>
+
+                    <StackPanel x:Name="spTypeAnimal" 
+                                Grid.Column="0" Grid.ColumnSpan="2" 
+                                Grid.Row="5" Grid.RowSpan="2">
+                        <ListView x:Name="lvAnimal"
+                                  Width="300" 
+                                  Height="100">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Animal.Name}" 
+                                           Height="50"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <ComboBox Name="cbTypeAnimal"/>
+                        <Button x:Name="btnAddAnimal" 
+                                Content="Добавить животное" 
+                                Click="btnAddAnimal_Click"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"/>
+                        <Button x:Name="btnDelAmimal" 
+                                Content="Удалить животное" 
+                                Click="btnDelAmimal_Click"
+                                Foreground="#FF6A6D6C"
+                                BorderBrush="#FFE5D6D1"
+                                Background="#FFE4D5D0"/>
+                    </StackPanel>
+
+                    <Image x:Name="imgPhoto"
+                           Grid.Row="1" Grid.RowSpan="4"
+                           Grid.Column="2" Grid.ColumnSpan="3"
+                           Margin="30, 0, 20, 0"/>
+
+                    <Button x:Name="btnAddPhoto"
+                            Grid.Column="2" Grid.ColumnSpan="3"
+                            Grid.Row="5"
+                            Content="Выбрать фото"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Stretch"
+                            FontSize="20"
+                            Foreground="#FF6A6D6C"
+                            BorderBrush="#FFE5D6D1"
+                            Background="#FFE4D5D0"
+                            Margin="10"
+                            Click="btnAddPhoto_Click"/>
+
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>

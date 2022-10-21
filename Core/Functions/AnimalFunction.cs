@@ -19,26 +19,31 @@ namespace Core.Functions
             return bd_connection.connection.User_Animal.Count(x => x.IDAnimal == IDAnimal && x.IDUser == IDUser);
         }
 
+        public static int AnimaleUniqApp(int IDApplication, int IDAnimal)
+        {
+            return bd_connection.connection.Application_Animal.Count(x => x.ID_Animal == IDAnimal && x.ID_Application == IDApplication);
+        }
+
         public static void SaveAnimalUser(User_Animal userAnimal)
         {
             bd_connection.connection.User_Animal.Add(userAnimal);
         }
 
-        public static List<User_Animal> GetUserAnimals(int IDUser)
+        public static void SaveAnimalApplication(Application_Animal applicationAnimal)
         {
-            return bd_connection.connection.User_Animal.Where(x => x.IDUser == IDUser).ToList();
-        }
-
-        public static void DeleteUserAnimal(int IDUser, int IDAnimal)
-        {
-            var selectUserAnimal = bd_connection.connection.User_Animal.ToList().Find(x => x.IDUser == IDUser && x.IDAnimal == IDAnimal);
-            bd_connection.connection.User_Animal.Remove(selectUserAnimal);
+            bd_connection.connection.Application_Animal.Add(applicationAnimal);
         }
 
         public static void DeleteUserAnimal(User user, User_Animal animal)
         {
             var selectedAnimal = user.User_Animal.FirstOrDefault(x => x.IDAnimal == animal.IDAnimal && x.IDUser == animal.IDUser);
             user.User_Animal.Remove(selectedAnimal);
+        }
+
+        public static void DeleteApplicationAnimal(Applictioon applictioon, Application_Animal animal)
+        {
+            var selectedAnimal = applictioon.Application_Animal.FirstOrDefault(x => x.ID_Animal == animal.ID_Animal && x.ID_Application == animal.ID_Application);
+            applictioon.Application_Animal.Remove(selectedAnimal);
         }
     }
 }

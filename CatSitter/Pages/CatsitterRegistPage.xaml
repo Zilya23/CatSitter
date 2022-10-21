@@ -109,7 +109,7 @@
                                         Foreground="#FF6A6D6C"
                                         BorderBrush="#FF6A6D6C"
                                         Background="#FFE4D5D0"
-                                        Click="btnSave_Click"/>
+                                        Click="btnSave_Click" />
                             </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>

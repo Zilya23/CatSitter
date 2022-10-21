@@ -50,5 +50,11 @@ namespace Core.Functions
         {
             return applictioon.User == user;
         }
+
+        public static void AddApplication(Applictioon applictioon)
+        {
+            bd_connection.connection.Applictioon.Add(applictioon);
+            bd_connection.connection.SaveChanges();
+        }
     }
 }

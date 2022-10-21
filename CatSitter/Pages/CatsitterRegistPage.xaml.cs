@@ -97,7 +97,6 @@ namespace CatSitter.Pages
                 var isAnimal = AnimalFunction.AnimaleUniq((int)animalUser.IDUser, (int)animalUser.IDAnimal);
                 if (isAnimal == 0)
                 {
-                    //AuthorizationPage.user.User_Animal.Add(new User_Animal() { User = AuthorizationPage.user, Animal = cbTypeAnimal.SelectedItem as Animal });
                     AnimalFunction.SaveAnimalUser(animalUser);
                 }
                 UpdateAnimal();
@@ -145,12 +144,12 @@ namespace CatSitter.Pages
 
         private void btnUserApplication_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new UserApplicationPage());
         }
 
         private void btnUserRespond_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new RespondPage());
         }
     }
 }
