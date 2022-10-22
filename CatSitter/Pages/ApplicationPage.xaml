@@ -93,6 +93,11 @@
                             AutomationProperties.Name="HamburgerToggleButton"
                             IsChecked="False"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                            <TextBlock Text="Заявки"
+                                       HorizontalAlignment="Center"
+                                       FontSize="30"
+                                       Foreground="#FFB48A8E"
+                                       Margin="40, 0, 0, 0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                         HorizontalAlignment="Right">

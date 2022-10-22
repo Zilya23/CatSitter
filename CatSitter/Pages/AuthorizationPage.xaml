@@ -34,9 +34,9 @@
         <TextBlock Text="Авторизация"
                    Grid.Column="2" Grid.ColumnSpan="3"
                    Grid.Row="1"
-                   VerticalAlignment="Center"
+                   VerticalAlignment="Bottom"
                    HorizontalAlignment="Center"
-                   FontSize="30"
+                   FontSize="40"
                    FontWeight="Bold" 
                    Foreground="#FFB48A8E"/>
 

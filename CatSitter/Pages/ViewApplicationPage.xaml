@@ -96,7 +96,17 @@
                         </StackPanel>
                             <StackPanel HorizontalAlignment="Right"
                                         Orientation="Horizontal">
-                            <Button x:Name="btnDelete"
+                                <Button x:Name="btnRedact"
+                                        Content="Редактировать"
+                                        Visibility="Hidden"
+                                        HorizontalAlignment="Center"
+                                        FontSize="30"
+                                        Height="50"
+                                        Foreground="#FF6A6D6C"
+                                        BorderBrush="#FFE5D6D1"
+                                        Background="#FFE4D5D0"
+                                        Click="btnRedact_Click" Cursor="Hand"/>
+                                <Button x:Name="btnDelete"
                                         Content="Удалить"
                                         Visibility="Hidden"
                                         HorizontalAlignment="Center"
@@ -106,7 +116,7 @@
                                         BorderBrush="#FFE5D6D1"
                                         Background="#FFE4D5D0"
                                         Click="btnDelete_Click"/>
-                            <Button x:Name="btnRespond"
+                                <Button x:Name="btnRespond"
                                         Content="Откликнуться"
                                         Visibility="Hidden"
                                         HorizontalAlignment="Center"
@@ -209,6 +219,47 @@
                                TextAlignment="Right"
                                FontSize="20"
                                VerticalAlignment="Bottom"/>
+
+                    <TextBlock x:Name="tbtrueCatsitter"
+                               Text="Одобрено кэттситером"
+                               Grid.Column="2"
+                               Grid.Row="5"
+                               Margin="0, 20, 0, 0"
+                               FontSize="20"
+                               TextAlignment="Left"
+                               VerticalAlignment="Top"
+                               Visibility="Hidden"
+                               />
+
+                    <TextBlock x:Name="tbtrueOwner"
+                               Text="Одобрено хозяином"
+                               Grid.Column="2"
+                               Grid.Row="5"
+                               FontSize="20"
+                               TextAlignment="Left"
+                               VerticalAlignment="Bottom"
+                               Visibility="Hidden"/>
+                    
+                    <CheckBox x:Name="cbTrueCatsitter"
+                              Grid.Column="2"
+                              Grid.Row="5"
+                              Margin="0, 20, 0, 0"
+                              FontSize="20"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              Visibility="Hidden"
+                              IsEnabled="False"/>
+
+                    <CheckBox x:Name="cbTrueOwner"
+                              Grid.Column="2"
+                              Grid.Row="5"
+                              Margin="0, 20, 0, 0"
+                              FontSize="20"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Bottom"
+                              Visibility="Hidden"
+                              IsEnabled="False"/>
+
                 </Grid>
             </DockPanel>
         </materialDesign:DrawerHost>

@@ -23,7 +23,7 @@ namespace CatSitter.Pages
     public partial class ViewApplicationPage : Page
     {
         public static Applictioon application {get; set;}
-        public ViewApplicationPage(Applictioon applictioon)
+        public ViewApplicationPage(Applictioon applictioon, Visibility visibility = Visibility.Hidden)
         {
             InitializeComponent();
             application = applictioon;
@@ -48,6 +48,13 @@ namespace CatSitter.Pages
             if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
             {
                 btnDelete.Visibility = Visibility.Visible;
+            }
+
+            tbtrueCatsitter.Visibility = visibility;
+            cbTrueCatsitter.Visibility = visibility;
+            if(visibility == Visibility.Visible)
+            {
+                cbTrueCatsitter.IsEnabled = true;
             }
 
             this.DataContext = application;
@@ -92,6 +99,11 @@ namespace CatSitter.Pages
         {
             ApplicationFunction.DeleteApplication(application);
             NavigationService.Navigate(new UserApplicationPage());
+        }
+
+        private void btnRedact_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddApplication(application));
         }
     }
 }

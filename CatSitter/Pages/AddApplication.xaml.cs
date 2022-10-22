@@ -27,7 +27,7 @@ namespace CatSitter.Pages
         public static Applictioon constApplictioon = new Applictioon();
         public static List<Application_Animal> applications = new List<Application_Animal>();
         public static List<Animal> animalss = new List<Animal>();
-        public AddApplication()
+        public AddApplication(Applictioon applictioon = null)
         {
             InitializeComponent();
             List<City> cities = CityFunction.GetCities();
@@ -37,6 +37,11 @@ namespace CatSitter.Pages
             var animals = AnimalFunction.GetAnimals();
             cbTypeAnimal.ItemsSource = animals;
             cbTypeAnimal.DisplayMemberPath = "Name";
+
+            if (applictioon != null)
+            {
+
+            }
         }
 
         private void btnApplication_Click(object sender, RoutedEventArgs e)
@@ -79,18 +84,43 @@ namespace CatSitter.Pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            constApplictioon.Name = tbName.Text.Trim();
-            constApplictioon.Description = tbDescription.Text.Trim();
-            constApplictioon.StartDate = Convert.ToDateTime(dpStartDate.Text);
-            constApplictioon.EndDate = Convert.ToDateTime(dpEndDate.Text);
-            constApplictioon.Price = Convert.ToDecimal(tbPrice.Text.Trim());
-            constApplictioon.IDCity = (cbCity.SelectedItem as City).ID;
-            constApplictioon.IDUser = AuthorizationPage.user.ID;
-            constApplictioon.Active = true;
-            ApplicationFunction.AddApplication(constApplictioon);
-            AnimalFunction.SaveAnimalApplicqation(applications);
-            MessageBox.Show("Успешно!");
-            NavigationService.Navigate(new ApplicationPage());
+            if (tbName.Text.Trim().Length != 0)
+            {
+                constApplictioon.Name = tbName.Text.Trim();
+            }
+            else if (tbDescription.Text.Trim().Length != 0)
+            {
+                constApplictioon.Description = tbDescription.Text.Trim();
+            }
+            else if(dpStartDate.Text.Length != 0)
+            {
+                constApplictioon.StartDate = Convert.ToDateTime(dpStartDate.Text);
+            }
+            else if(dpEndDate.Text.Length != 0)
+            {
+                constApplictioon.EndDate = Convert.ToDateTime(dpEndDate.Text);
+            }
+            else if(tbPrice.Text.Trim().Length != 0)
+            {
+                constApplictioon.Price = Convert.ToDecimal(tbPrice.Text.Trim());
+            }
+            else if(cbCity.SelectedItem != null)
+            {
+                constApplictioon.IDCity = (cbCity.SelectedItem as City).ID;
+            }
+            else if(applications.Count != 0)
+            {
+                constApplictioon.IDUser = AuthorizationPage.user.ID;
+                constApplictioon.Active = true;
+                ApplicationFunction.AddApplication(constApplictioon);
+                AnimalFunction.SaveAnimalApplicqation(applications);
+                MessageBox.Show("Успешно!");
+                NavigationService.Navigate(new ApplicationPage());
+            }
+            else
+            {
+                MessageBox.Show("Заполните все данные");
+            }
         }
 
         private void btnDelAmimal_Click(object sender, RoutedEventArgs e)

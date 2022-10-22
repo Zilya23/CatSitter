@@ -59,7 +59,7 @@ namespace CatSitter.Pages
             if(lvRespond.SelectedItem != null)
             {
                 var selectApplication = (lvRespond.SelectedItem as User_Application).Applictioon;
-                NavigationService.Navigate(new ViewApplicationPage(selectApplication));
+                NavigationService.Navigate(new ViewApplicationPage(selectApplication, Visibility.Visible));
             }
         }
 

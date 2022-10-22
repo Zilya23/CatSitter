@@ -8,8 +8,12 @@
       AutomationProperties.Name="{Binding Title, RelativeSource={RelativeSource Self}}"
       mc:Ignorable="d" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters"
+      xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal"
+      xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AddApplication">
+
 
     <materialDesign:DialogHost DialogTheme="Inherit"
                              Identifier="RootDialog"
@@ -94,6 +98,11 @@
                             AutomationProperties.Name="HamburgerToggleButton"
                             IsChecked="False"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                            <TextBlock Text="Создать заявку"
+                                       HorizontalAlignment="Center"
+                                       FontSize="30"
+                                       Foreground="#FFB48A8E"
+                                       Margin="40, 0, 0, 0"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Right">
@@ -129,6 +138,7 @@
                     <TextBox x:Name="tbName"
                              materialDesign:HintAssist.Hint="Заголовок"  
                              materialDesign:HintAssist.IsFloating="True"
+                             materialDesign:HintAssist.HelperText="Helper text longer than error"
                              Grid.Row="0"
                              Grid.Column="0" Grid.ColumnSpan="2"
                              HorizontalAlignment="Stretch"
