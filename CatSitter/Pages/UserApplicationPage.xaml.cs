@@ -54,7 +54,7 @@ namespace CatSitter.Pages
         private void lvUserApplication_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectApplication = lvUserApplication.SelectedItem as Applictioon;
-            NavigationService.Navigate(new ViewApplicationPage(selectApplication));
+            NavigationService.Navigate(new ViewApplicationPage(selectApplication, Visibility.Hidden, Visibility.Visible));
         }
     }
 }

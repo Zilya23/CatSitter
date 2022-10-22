@@ -23,7 +23,7 @@ namespace CatSitter.Pages
     public partial class ViewApplicationPage : Page
     {
         public static Applictioon application {get; set;}
-        public ViewApplicationPage(Applictioon applictioon, Visibility visibility = Visibility.Hidden)
+        public ViewApplicationPage(Applictioon applictioon, Visibility visibility = Visibility.Hidden, Visibility visibilityUser = Visibility.Hidden)
         {
             InitializeComponent();
             application = applictioon;
@@ -43,6 +43,16 @@ namespace CatSitter.Pages
             if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
             {
                 btnRespond.Visibility = Visibility.Hidden;
+            }
+
+            if(visibilityUser == Visibility.Visible)
+            {
+                var catsitterList = ApplicationFunction.GetRespond(application.ID);
+                if (catsitterList.Count != 0)
+                {
+                    spCatsitter.Visibility = Visibility.Visible;
+                    lvCatsitter.ItemsSource = catsitterList;
+                }
             }
 
             if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
@@ -104,6 +114,21 @@ namespace CatSitter.Pages
         private void btnRedact_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddApplication(application));
+        }
+
+        private void btnSelectCatsitter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lvCatsitter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lvCatsitter.SelectedItem != null)
+            {
+                var selectCatsitter = (lvCatsitter.SelectedItem as User_Application).User;
+                UserWindow userWindow = new UserWindow(selectCatsitter);
+                userWindow.ShowDialog();
+            }
         }
     }
 }

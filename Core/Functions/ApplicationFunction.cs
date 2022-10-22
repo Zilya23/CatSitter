@@ -15,6 +15,11 @@ namespace Core.Functions
             return applications;
         }
 
+        public static List<User_Application> GetRespond(int IDApplication)
+        {
+            return bd_connection.connection.User_Application.Where(x => x.IDApplication == IDApplication).ToList();
+        }
+
         public static void SaveRespond(User_Application user_Application)
         {
             bd_connection.connection.User_Application.Add(user_Application);

@@ -138,7 +138,6 @@
                     <TextBox x:Name="tbName"
                              materialDesign:HintAssist.Hint="Заголовок"  
                              materialDesign:HintAssist.IsFloating="True"
-                             materialDesign:HintAssist.HelperText="Helper text longer than error"
                              Grid.Row="0"
                              Grid.Column="0" Grid.ColumnSpan="2"
                              HorizontalAlignment="Stretch"
