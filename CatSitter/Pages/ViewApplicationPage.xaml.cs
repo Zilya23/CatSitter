@@ -23,10 +23,12 @@ namespace CatSitter.Pages
     public partial class ViewApplicationPage : Page
     {
         public static Applictioon application {get; set;}
+        public static Visibility userVisibility { get; set; }
         public ViewApplicationPage(Applictioon applictioon, Visibility visibility = Visibility.Hidden, Visibility visibilityUser = Visibility.Hidden)
         {
             InitializeComponent();
             application = applictioon;
+            userVisibility = visibilityUser;
 
             tbDate.Text = " с " + application.StartDate.ToString().Split(' ')[0] + " по " + application.EndDate.ToString().Split(' ')[0];
 
@@ -60,11 +62,10 @@ namespace CatSitter.Pages
                 btnDelete.Visibility = Visibility.Visible;
             }
 
-            tbtrueCatsitter.Visibility = visibility;
-            cbTrueCatsitter.Visibility = visibility;
-            if(visibility == Visibility.Visible)
+            if(visibility == Visibility.Visible && application.Active == true && ApplicationFunction.QwnerTrue(application))
             {
-                cbTrueCatsitter.IsEnabled = true;
+                btnFalseCatsitter.Visibility = Visibility.Visible;
+                btnTrueCatsitter.Visibility = Visibility.Visible;
             }
 
             this.DataContext = application;
@@ -126,9 +127,33 @@ namespace CatSitter.Pages
             if(lvCatsitter.SelectedItem != null)
             {
                 var selectCatsitter = (lvCatsitter.SelectedItem as User_Application).User;
-                UserWindow userWindow = new UserWindow(selectCatsitter);
+                var selectCatsitter2 = lvCatsitter.SelectedItem as User_Application;
+                UserWindow userWindow = new UserWindow(selectCatsitter, selectCatsitter2);
                 userWindow.ShowDialog();
+                Update();
             }
+        }
+
+        public void Update()
+        {
+            var catsitterList = ApplicationFunction.GetRespond(application.ID);
+            if (catsitterList.Count != 0)
+            {
+                spCatsitter.Visibility = Visibility.Visible;
+                lvCatsitter.ItemsSource = catsitterList;
+            }
+        }
+
+        private void btnFalseCatsitter_Click(object sender, RoutedEventArgs e)
+        {
+            var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID && x.IDUser == AuthorizationPage.user.ID).FirstOrDefault();
+            ApplicationFunction.ApplicationRespondFalse(catsitterList);
+        }
+
+        private void btnTrueCatsitter_Click(object sender, RoutedEventArgs e)
+        {
+            var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID && x.IDUser == AuthorizationPage.user.ID).FirstOrDefault();
+            ApplicationFunction.ApplicationRespondTrue(catsitterList);
         }
     }
 }

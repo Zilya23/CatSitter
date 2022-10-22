@@ -17,7 +17,7 @@ namespace Core.Functions
 
         public static List<User_Application> GetRespond(int IDApplication)
         {
-            return bd_connection.connection.User_Application.Where(x => x.IDApplication == IDApplication).ToList();
+            return bd_connection.connection.User_Application.Where(x => x.IDApplication == IDApplication && x.Applictioon.Active == true).ToList();
         }
 
         public static void SaveRespond(User_Application user_Application)
@@ -65,6 +65,49 @@ namespace Core.Functions
         {
             applictioon.IsDelete = true;
             bd_connection.connection.SaveChanges();
+        }
+
+        public static void ApplicationRespondTrue(User_Application application)
+        {
+            application.ApplicationRespond = true;
+            bd_connection.connection.SaveChanges();
+        }
+        public static void ApplicationRespondFalse(User_Application application)
+        {
+            application.ApplicationRespond = false;
+            bd_connection.connection.SaveChanges();
+        }
+        public static void UserApplicationFalse(User_Application application)
+        {
+            application.UserRespond = false;
+            bd_connection.connection.SaveChanges();
+        }
+        public static void UserApplicationTrue(User_Application application)
+        {
+            application.UserRespond = true;
+            bd_connection.connection.SaveChanges();
+        }
+
+        public static void ApplicationTrue(User_Application application)
+        {
+            if (application.UserRespond == true && application.ApplicationRespond == true)
+            {
+                application.Applictioon.Active = true;
+                bd_connection.connection.SaveChanges();
+            }
+        }
+
+        public static bool QwnerTrue(Applictioon applictioon)
+        {
+            var lists = bd_connection.connection.User_Application.Where(x => x.Applictioon.ID == applictioon.ID && x.UserRespond == true).ToList();
+            if(lists.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

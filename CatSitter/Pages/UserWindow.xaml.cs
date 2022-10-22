@@ -21,11 +21,13 @@ namespace CatSitter.Pages
     /// </summary>
     public partial class UserWindow : Window
     {
-        User selectUser { get; set; } 
-        public UserWindow(User user)
+        User selectUser { get; set; }
+        User_Application selectApplictioon { get; set; }
+        public UserWindow(User user, User_Application applictioon)
         {
             InitializeComponent();
             selectUser = user;
+            selectApplictioon = applictioon;
 
             if(user.ThereAnimal == true)
             {
@@ -50,12 +52,14 @@ namespace CatSitter.Pages
 
         private void btnAccept_Click(object sender, RoutedEventArgs e)
         {
-            
+            ApplicationFunction.UserApplicationTrue(selectApplictioon);
+            this.Close();
         }
 
         private void btnNoAccept_Click(object sender, RoutedEventArgs e)
         {
-
+            ApplicationFunction.UserApplicationFalse(selectApplictioon);
+            this.Close();
         }
     }
 }
