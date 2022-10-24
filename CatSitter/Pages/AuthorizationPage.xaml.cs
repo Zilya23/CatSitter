@@ -42,5 +42,10 @@ namespace CatSitter.Pages
                 MessageBox.Show("Неверный логин или пароль");
             }
         }
+
+        private void tbRegist_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new RegistrationPage());
+        }
     }
 }

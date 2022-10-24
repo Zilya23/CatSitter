@@ -28,7 +28,7 @@ namespace CatSitter.Pages
             InitializeComponent();
             listRespond = ApplicationFunction.GetUserRespond(AuthorizationPage.user.ID);
 
-            List<string> statusRespond = new List<string>(){"Все", "Одобрено", "Ждет согласования", "Отказано" };
+            List<string> statusRespond = new List<string>(){"Все", "Одобрено хозяином", "Утверждено", "Отказано" };
             cbStatus.ItemsSource = statusRespond;
 
             this.DataContext = this;
@@ -65,7 +65,34 @@ namespace CatSitter.Pages
 
         private void cbStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Filter();
+        }
 
+        public void Filter()
+        {
+            List<User_Application> user_Applications = new List<User_Application>();
+
+            if(cbStatus.SelectedItem != null)
+            {
+                if(cbStatus.SelectedIndex == 0)
+                {
+                    user_Applications = listRespond;
+                }
+                else if(cbStatus.SelectedIndex == 1)
+                {
+                    user_Applications = listRespond.Where(x => x.UserRespond == true && x.ApplicationRespond == null).ToList();
+                }
+                else if(cbStatus.SelectedIndex == 2)
+                {
+                    user_Applications = listRespond.Where(x => x.UserRespond == true && x.ApplicationRespond == true).ToList();
+                }
+                else if(cbStatus.SelectedIndex == 3)
+                {
+                    user_Applications = listRespond.Where(x => x.UserRespond == false || x.ApplicationRespond == false).ToList();
+                }
+            }
+
+            lvRespond.ItemsSource = user_Applications;
         }
     }
 }

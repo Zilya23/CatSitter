@@ -327,13 +327,6 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-                        <Button x:Name="btnSelectCatsitter" 
-                                Content="Выбрать" 
-                                Click="btnSelectCatsitter_Click"
-                                Foreground="#FF6A6D6C"
-                                BorderBrush="#FFE5D6D1"
-                                Background="#FFE4D5D0"
-                                Width="500" Cursor="Hand"/>
                     </StackPanel>
                 </Grid>
             </DockPanel>

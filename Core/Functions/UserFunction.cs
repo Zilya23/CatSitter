@@ -25,5 +25,11 @@ namespace Core.Functions
                 return false;
             }
         }
+
+        public static void Registration(User user)
+        {
+            bd_connection.connection.User.Add(user);
+            bd_connection.connection.SaveChanges();
+        }
     }
 }

@@ -137,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\RespondPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -169,6 +173,9 @@
     </Compile>
     <Compile Include="Pages\CatsitterRegistPage.xaml.cs">
       <DependentUpon>CatsitterRegistPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RegistrationPage.xaml.cs">
+      <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RespondPage.xaml.cs">
       <DependentUpon>RespondPage.xaml</DependentUpon>

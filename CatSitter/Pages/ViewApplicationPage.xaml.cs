@@ -49,11 +49,17 @@ namespace CatSitter.Pages
 
             if(visibilityUser == Visibility.Visible)
             {
-                var catsitterList = ApplicationFunction.GetRespond(application.ID);
-                if (catsitterList.Count != 0)
+                var catsitter = bd_connection.connection.User_Application.Where(x => x.UserRespond == true && x.Applictioon.ID == application.ID).FirstOrDefault();
+                if (catsitter != null)
                 {
                     spCatsitter.Visibility = Visibility.Visible;
+                    var catsitterList = bd_connection.connection.User_Application.Where(x => x.Applictioon.ID == application.ID).ToList();
                     lvCatsitter.ItemsSource = catsitterList;
+                }
+                else
+                {
+                    spCatsitter.Visibility = Visibility.Hidden;
+                    lvCatsitter.Visibility = Visibility.Hidden;
                 }
             }
 
@@ -133,11 +139,6 @@ namespace CatSitter.Pages
             NavigationService.Navigate(new AddApplication(application));
         }
 
-        private void btnSelectCatsitter_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void lvCatsitter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(lvCatsitter.SelectedItem != null)
@@ -152,11 +153,17 @@ namespace CatSitter.Pages
 
         public void Update()
         {
-            var catsitterList = ApplicationFunction.GetRespond(application.ID);
-            if (catsitterList.Count != 0)
+            var catsitter = bd_connection.connection.User_Application.Where(x => x.UserRespond == true && x.Applictioon.ID == application.ID).FirstOrDefault();
+            if (catsitter != null)
             {
                 spCatsitter.Visibility = Visibility.Visible;
+                var catsitterList = bd_connection.connection.User_Application.Where(x => x.Applictioon.ID == application.ID);
                 lvCatsitter.ItemsSource = catsitterList;
+                lvCatsitter.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                spCatsitter.Visibility = Visibility.Hidden;
             }
         }
 

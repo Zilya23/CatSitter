@@ -17,7 +17,7 @@ namespace Core.Functions
 
         public static List<User_Application> GetRespond(int IDApplication)
         {
-            return bd_connection.connection.User_Application.Where(x => x.IDApplication == IDApplication && x.Applictioon.Active == true).ToList();
+            return bd_connection.connection.User_Application.Where(x => x.IDApplication == IDApplication && x.UserRespond == true).ToList();
         }
 
         public static void SaveRespond(User_Application user_Application)
