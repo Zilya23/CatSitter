@@ -218,7 +218,7 @@
                         <ComboBox Name="cbTypeAnimal"/>
                         <Button x:Name="btnAddAnimal" 
                                 Content="Добавить животное" 
-                                Click="btnAddAnimal_Click"
+                                Click="btnAddAnimal_Click"        
                                 Foreground="#FF6A6D6C"
                                 BorderBrush="#FFE5D6D1"
                                 Background="#FFE4D5D0"/>
