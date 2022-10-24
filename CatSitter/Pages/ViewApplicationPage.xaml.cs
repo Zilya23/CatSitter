@@ -68,6 +68,22 @@ namespace CatSitter.Pages
                 btnTrueCatsitter.Visibility = Visibility.Visible;
             }
 
+            var applicationTrue = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID).FirstOrDefault();
+            if (applicationTrue.ApplicationRespond == true)
+            {
+                tbRespondTrue.Visibility = Visibility.Visible;
+                btnFalseCatsitter.Visibility = Visibility.Hidden;
+                btnTrueCatsitter.Visibility = Visibility.Hidden;
+            }
+
+            if(applicationTrue.ApplicationRespond == true && applicationTrue.UserRespond == true)
+            {
+                tbRespondTel.Text = applicationTrue.User.Telephone;
+                tbUserTel.Text = application.User.Telephone;
+                tbTelCatsitter.Visibility = Visibility.Visible;
+                tbTelOwner.Visibility = Visibility.Visible;
+            }
+
             this.DataContext = application;
         }
         private void btnApplication_Click(object sender, RoutedEventArgs e)
@@ -148,12 +164,16 @@ namespace CatSitter.Pages
         {
             var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID && x.IDUser == AuthorizationPage.user.ID).FirstOrDefault();
             ApplicationFunction.ApplicationRespondFalse(catsitterList);
+            btnFalseCatsitter.Visibility = Visibility.Hidden;
+            NavigationService.Navigate(new RespondPage());
         }
 
         private void btnTrueCatsitter_Click(object sender, RoutedEventArgs e)
         {
             var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID && x.IDUser == AuthorizationPage.user.ID).FirstOrDefault();
             ApplicationFunction.ApplicationRespondTrue(catsitterList);
+            btnTrueCatsitter.Visibility= Visibility.Hidden;
+            NavigationService.Navigate(new RespondPage());
         }
     }
 }

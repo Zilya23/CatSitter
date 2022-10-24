@@ -241,7 +241,7 @@
                                VerticalAlignment="Bottom"
                                Visibility="Hidden"/>
 
-                    <Button x:Name="btnTrueCatsitter"
+                    <Button x:Name="btnFalseCatsitter"
                             Content="Отклонить"
                             Grid.Column="2"
                             Grid.Row="6"
@@ -254,8 +254,8 @@
                             Foreground="#FF6A6D6C"
                             BorderBrush="#FFE5D6D1"
                             Background="#FFE4D5D0"
-                            Click="btnTrueCatsitter_Click"/>
-                    <Button x:Name="btnFalseCatsitter"
+                            Click="btnFalseCatsitter_Click"/>
+                    <Button x:Name="btnTrueCatsitter"
                             Content="Принять"
                             Grid.Column="3"
                             Grid.Row="6"
@@ -268,7 +268,44 @@
                             Foreground="#FF6A6D6C"
                             BorderBrush="#FFE5D6D1"
                             Background="#FFE4D5D0"
-                            Click="btnFalseCatsitter_Click"/>
+                            Click="btnTrueCatsitter_Click"/>
+
+                    <TextBlock Text="Заявка одобрена"
+                               Name="tbRespondTrue"
+                               Grid.Column="2" Grid.ColumnSpan="3"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Bottom"
+                               Grid.Row="5"
+                               Visibility="Hidden"
+                               Foreground="#FF6A6D6C"
+                               FontSize="30"/>
+                    
+                    <TextBlock Text="Телефон хозяина"
+                               Name="tbTelOwner"
+                               Grid.Column="3"
+                               Grid.Row="3"
+                               Visibility="Hidden"
+                               Margin="40, 0, 0, 0"
+                               FontSize="20"/>
+
+                    <TextBlock Text="Телефон кэтситтера"
+                               Name="tbTelCatsitter"
+                               Grid.Column="3"
+                               Grid.Row="4"
+                               Visibility="Hidden"
+                               Margin="40, 0, 0, 0"
+                               FontSize="20"/>
+
+                    <TextBlock x:Name="tbUserTel"
+                               Grid.Column="4"
+                               Grid.Row="3"
+                               FontSize="20"/>
+
+                    <TextBlock x:Name="tbRespondTel"
+                               Grid.Column="4"
+                               Grid.Row="4"
+                               FontSize="20"/>
+
 
                     <StackPanel x:Name="spCatsitter" 
                                 Grid.Column="3" Grid.ColumnSpan="2"
