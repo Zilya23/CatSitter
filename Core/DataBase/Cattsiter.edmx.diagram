@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="518b65a964384657bc7bd77845ccbe47" Name="Diagram1">
+      <Diagram DiagramId="eee9c4afb8cf48b8a9534554c11c6f7c" Name="Diagram1">
         <EntityTypeShape EntityType="CatSitterModel.Animal" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CatSitterModel.Application_Animal" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="CatSitterModel.Applictioon" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CatSitterModel.Applictioon" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="CatSitterModel.City" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="CatSitterModel.Housing" Width="1.5" PointX="3.75" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CatSitterModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />

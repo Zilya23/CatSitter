@@ -13,10 +13,10 @@ namespace Core.DataBase
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CatSitterEntities1 : DbContext
+    public partial class CatSitterEntities : DbContext
     {
-        public CatSitterEntities1()
-            : base("name=CatSitterEntities1")
+        public CatSitterEntities()
+            : base("name=CatSitterEntities")
         {
         }
     

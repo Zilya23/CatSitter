@@ -34,7 +34,7 @@
                                 Background="#FFE4D5D0"
                                 Margin="10"
                                 Width="300"
-                                Click="btnApplication_Click" Cursor="Hand"/>
+                                Click="btnApplication_Click"/>
                         <Button x:Name="btnCatsitter"
                                 Content="Стать кэтситтером"
                                 HorizontalAlignment="Center"
@@ -109,7 +109,7 @@
                                         Foreground="#FF6A6D6C"
                                         BorderBrush="#FF6A6D6C"
                                         Background="#FFE4D5D0"
-                                        Click="btnSave_Click" Cursor="Hand" />
+                                        Click="btnSave_Click"/>
                             </StackPanel>
                     </DockPanel>
                 </materialDesign:ColorZone>

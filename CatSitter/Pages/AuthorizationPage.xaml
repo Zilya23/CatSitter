@@ -81,6 +81,7 @@
                    Foreground="#FF6A6D6C"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Center"
+                   Cursor="Hand"
                    MouseDown="tbRegist_MouseDown"/>
     </Grid>
 </Page>

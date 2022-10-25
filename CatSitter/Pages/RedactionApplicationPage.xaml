@@ -95,7 +95,7 @@
                             AutomationProperties.Name="HamburgerToggleButton"
                             IsChecked="False"
                             Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
-                            <TextBlock Text="Создать заявку"
+                            <TextBlock Text="Редактировать заявку"
                                        HorizontalAlignment="Center"
                                        FontSize="30"
                                        Foreground="#FFB48A8E"
@@ -133,6 +133,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBox x:Name="tbName"
+                             Text="{Binding Name}"
                              materialDesign:HintAssist.Hint="Заголовок"  
                              materialDesign:HintAssist.IsFloating="True"
                              Grid.Row="0"
@@ -144,6 +145,7 @@
                              FontSize="20"/>
 
                     <TextBox x:Name="tbDescription"
+                             Text="{Binding Description}"
                              materialDesign:HintAssist.Hint="Описание"  
                              materialDesign:HintAssist.IsFloating="True"
                              Grid.Row="1"
@@ -157,6 +159,7 @@
                              FontSize="20"/>
 
                     <DatePicker Name="dpStartDate"
+                                SelectedDate="{Binding StartDate}"
                                 materialDesign:HintAssist.Hint="Дата начала"
                                 materialDesign:HintAssist.IsFloating="True"
                                 Grid.Column="0"
@@ -168,6 +171,7 @@
                                 FontSize="20"/>
 
                     <DatePicker Name="dpEndDate"
+                                SelectedDate="{Binding EndDate}"
                                 materialDesign:HintAssist.Hint="Дата окончания"
                                 materialDesign:HintAssist.IsFloating="True"
                                 Grid.Column="1"
@@ -179,6 +183,7 @@
                                 FontSize="20"/>
 
                     <TextBox x:Name="tbPrice"
+                             Text="{Binding Price}"
                              materialDesign:HintAssist.Hint="Цена"  
                              materialDesign:HintAssist.IsFloating="True"
                              Grid.Row="3"
@@ -192,6 +197,7 @@
                              FontSize="20"/>
 
                     <ComboBox x:Name="cbCity"
+                              SelectedItem="{Binding City}"
                               materialDesign:HintAssist.Hint="Город"  
                               materialDesign:HintAssist.IsFloating="True"
                               Grid.Row="4"
@@ -201,16 +207,17 @@
                               Margin="20, 0, 0, 0"
                               FontSize="20"/>
 
+
                     <StackPanel x:Name="spTypeAnimal" 
                                 Grid.Column="0" Grid.ColumnSpan="2" 
                                 Grid.Row="5" Grid.RowSpan="2">
                         <ListView x:Name="lvAnimal"
                                   Width="300" 
                                   Height="100"
-                                  ItemsSource="{Binding animalss}">
+                                  ItemsSource="{Binding Application_Animal}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Label Content="{Binding Name}" 
+                                    <Label Content="{Binding Animal.Name}" 
                                            Height="50"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
@@ -231,6 +238,7 @@
                     </StackPanel>
 
                     <Image x:Name="imgPhoto"
+                           Source="{Binding Photo}"
                            Grid.Row="1" Grid.RowSpan="4"
                            Grid.Column="2" Grid.ColumnSpan="3"
                            Margin="30, 0, 20, 0"/>

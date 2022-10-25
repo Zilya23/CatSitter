@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище CatSitterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище CatSitterModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Animal">
           <Key>
             <PropertyRef Name="ID" />
@@ -35,7 +35,6 @@
           <Property Name="IDCity" Type="int" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="IsDelete" Type="bit" />
-          <Property Name="AnimalCount" Type="int" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -272,7 +271,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CatSitterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -309,12 +309,11 @@
           <Property Name="IDUser" Type="Int32" />
           <Property Name="IDCity" Type="Int32" />
           <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsDelete" Type="Boolean" />
           <NavigationProperty Name="Application_Animal" Relationship="Self.FK_Application_Animal_Applictioon" FromRole="Applictioon" ToRole="Application_Animal" />
           <NavigationProperty Name="City" Relationship="Self.FK_Applictioon_City" FromRole="Applictioon" ToRole="City" />
           <NavigationProperty Name="User" Relationship="Self.FK_Applictioon_User" FromRole="Applictioon" ToRole="User" />
           <NavigationProperty Name="User_Application" Relationship="Self.FK_User_Application_Applictioon" FromRole="Applictioon" ToRole="User_Application" />
-          <Property Name="IsDelete" Type="Boolean" />
-          <Property Name="AnimalCount" Type="Int32" />
         </EntityType>
         <EntityType Name="City">
           <Key>
@@ -512,7 +511,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CatSitterEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CatSitterEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Animal" EntityType="Self.Animal" />
           <EntitySet Name="Application_Animal" EntityType="Self.Application_Animal" />
           <EntitySet Name="Applictioon" EntityType="Self.Applictioon" />
@@ -568,7 +567,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CatSitterModelContainer" CdmEntityContainer="CatSitterEntities1">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CatSitterModelContainer" CdmEntityContainer="CatSitterEntities">
           <EntitySetMapping Name="Animal">
             <EntityTypeMapping TypeName="CatSitterModel.Animal">
               <MappingFragment StoreEntitySet="Animal">
@@ -589,8 +588,6 @@
           <EntitySetMapping Name="Applictioon">
             <EntityTypeMapping TypeName="CatSitterModel.Applictioon">
               <MappingFragment StoreEntitySet="Applictioon">
-                <ScalarProperty Name="AnimalCount" ColumnName="AnimalCount" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -601,6 +598,7 @@
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
                 <ScalarProperty Name="IDCity" ColumnName="IDCity" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

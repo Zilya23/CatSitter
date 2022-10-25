@@ -66,6 +66,7 @@ namespace CatSitter.Pages
             if(ApplicationFunction.IsYou(AuthorizationPage.user, applictioon))
             {
                 btnDelete.Visibility = Visibility.Visible;
+                btnRedact.Visibility = Visibility.Visible;
             }
 
             if(visibility == Visibility.Visible && application.Active == true && ApplicationFunction.QwnerTrue(application))
@@ -74,7 +75,7 @@ namespace CatSitter.Pages
                 btnTrueCatsitter.Visibility = Visibility.Visible;
             }
 
-            var applicationTrue = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID).FirstOrDefault();
+            var applicationTrue = bd_connection.connection.User_Application.FirstOrDefault(x => x.IDApplication == application.ID);
             if (applicationTrue.ApplicationRespond == true)
             {
                 tbRespondTrue.Visibility = Visibility.Visible;
@@ -136,7 +137,8 @@ namespace CatSitter.Pages
 
         private void btnRedact_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddApplication(application));
+
+            NavigationService.Navigate(new RedactionApplicationPage(application));
         }
 
         private void lvCatsitter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -181,6 +183,11 @@ namespace CatSitter.Pages
             ApplicationFunction.ApplicationRespondTrue(catsitterList);
             btnTrueCatsitter.Visibility= Visibility.Hidden;
             NavigationService.Navigate(new RespondPage());
+        }
+
+        private void btnRedact_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
