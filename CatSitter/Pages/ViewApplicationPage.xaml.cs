@@ -47,19 +47,23 @@ namespace CatSitter.Pages
                 btnRespond.Visibility = Visibility.Hidden;
             }
 
-            if(visibilityUser == Visibility.Visible)
+            var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID).ToList();
+            lvCatsitter.ItemsSource = catsitterList;
+
+            if (visibilityUser == Visibility.Visible)
             {
                 var catsitter = bd_connection.connection.User_Application.Where(x => x.UserRespond == true && x.Applictioon.ID == application.ID).FirstOrDefault();
+                
                 if (catsitter != null)
                 {
                     spCatsitter.Visibility = Visibility.Visible;
-                    var catsitterList = bd_connection.connection.User_Application.Where(x => x.Applictioon.ID == application.ID).ToList();
-                    lvCatsitter.ItemsSource = catsitterList;
+                    //var catsitterList = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID).ToList();
+                    //lvCatsitter.ItemsSource = catsitterList;
                 }
                 else
                 {
-                    spCatsitter.Visibility = Visibility.Hidden;
-                    lvCatsitter.Visibility = Visibility.Hidden;
+                    //spCatsitter.Visibility = Visibility.Hidden;
+                    //lvCatsitter.Visibility = Visibility.Hidden;
                 }
             }
 
@@ -75,21 +79,23 @@ namespace CatSitter.Pages
                 btnTrueCatsitter.Visibility = Visibility.Visible;
             }
 
-            var applicationTrue = bd_connection.connection.User_Application.FirstOrDefault(x => x.IDApplication == application.ID);
-            if (applicationTrue.ApplicationRespond == true)
-            {
-                tbRespondTrue.Visibility = Visibility.Visible;
-                btnFalseCatsitter.Visibility = Visibility.Hidden;
-                btnTrueCatsitter.Visibility = Visibility.Hidden;
-            }
+            User_Application applicationTrue = bd_connection.connection.User_Application.Where(x => x.IDApplication == application.ID).FirstOrDefault();
 
-            if(applicationTrue.ApplicationRespond == true && applicationTrue.UserRespond == true)
-            {
-                tbRespondTel.Text = applicationTrue.User.Telephone;
-                tbUserTel.Text = application.User.Telephone;
-                tbTelCatsitter.Visibility = Visibility.Visible;
-                tbTelOwner.Visibility = Visibility.Visible;
-            }
+                if(applicationTrue.ApplicationRespond == true)
+                { 
+                    tbRespondTrue.Visibility = Visibility.Visible;
+                    btnFalseCatsitter.Visibility = Visibility.Hidden;
+                    btnTrueCatsitter.Visibility = Visibility.Hidden;
+                }
+
+            
+                if (applicationTrue.ApplicationRespond == true && applicationTrue.UserRespond == true)
+                {
+                    tbRespondTel.Text = applicationTrue.User.Telephone;
+                    tbUserTel.Text = application.User.Telephone;
+                    tbTelCatsitter.Visibility = Visibility.Visible;
+                    tbTelOwner.Visibility = Visibility.Visible;
+                }
 
             this.DataContext = application;
         }

@@ -88,27 +88,27 @@ namespace CatSitter.Pages
             {
                 constApplictioon.Name = tbName.Text.Trim();
             }
-            else if (tbDescription.Text.Trim().Length != 0)
+            if (tbDescription.Text.Trim().Length != 0)
             {
                 constApplictioon.Description = tbDescription.Text.Trim();
             }
-            else if(dpStartDate.Text.Length != 0)
+            if(dpStartDate.Text.Length != 0)
             {
                 constApplictioon.StartDate = Convert.ToDateTime(dpStartDate.Text);
             }
-            else if(dpEndDate.Text.Length != 0)
+            if(dpEndDate.Text.Length != 0)
             {
                 constApplictioon.EndDate = Convert.ToDateTime(dpEndDate.Text);
             }
-            else if(tbPrice.Text.Trim().Length != 0)
+            if(tbPrice.Text.Trim().Length != 0)
             {
                 constApplictioon.Price = Convert.ToDecimal(tbPrice.Text.Trim());
             }
-            else if(cbCity.SelectedItem != null)
+            if(cbCity.SelectedItem != null)
             {
                 constApplictioon.IDCity = (cbCity.SelectedItem as City).ID;
             }
-            else if(applications.Count != 0)
+            if(applications.Count != 0)
             {
                 constApplictioon.IDUser = AuthorizationPage.user.ID;
                 constApplictioon.Active = true;
